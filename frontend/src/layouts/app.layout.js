@@ -3,10 +3,7 @@ import { Outlet } from "react-router-dom";
 import { useAuth } from '../contexts/authentication.context';
 
 const AppLayout = () => {
-
     const auth = useAuth();
-
-    console.log(auth.user);
 
     const LoggedInData = () => {
         if (!auth.user) return null;
@@ -21,6 +18,7 @@ const AppLayout = () => {
 
     return (
         <div>
+            <p>Layout</p>
             <LoggedInData />
             <Outlet />
         </div>

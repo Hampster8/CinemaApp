@@ -1,9 +1,10 @@
-import React, { useState } from 'react';
+import React from 'react';
+import useLocalStorage from '../utils/localStorage';
 
 const AuthenticationContext = React.createContext(null);
 export const AuthenticationProvider = ({children}) => {
 
-    const [user, SetUser] = useState(null);
+    const [user, SetUser] = useLocalStorage("userData");
 
     const login = (email, password) => {
         fetch('/api/auth/login',
@@ -37,7 +38,10 @@ export const AuthenticationProvider = ({children}) => {
 
     const logout = () => {
         fetch('/api/auth/logout')
-        .then(() => window.location.href="/login");
+        .then(() => {
+            SetUser(null);
+            window.location.href="/login"
+        });
     };
 
     const verify = () => {
