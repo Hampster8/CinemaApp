@@ -29,7 +29,6 @@ JWT_SECRET = BV9G9MAV6LYD8U6YIBS07AYHVB8QOXF2
 ```
 
 &nbsp;
-&nbsp;
 
 ### Package.json Scripts
 
