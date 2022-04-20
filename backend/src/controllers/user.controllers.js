@@ -42,7 +42,7 @@ const signupUser = async (req, res) => {
     }
 
     const user = new User({
-        firstName: req.body.fullName,
+        firstName: req.body.firstName,
         lastName: req.body.lastName,
         email: req.body.email,
         password: hashPassword(password)

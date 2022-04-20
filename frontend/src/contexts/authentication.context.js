@@ -1,22 +1,52 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 
 const AuthenticationContext = React.createContext(null);
 export const AuthenticationProvider = ({children}) => {
 
-    const [authorized, SetAuthorized] = useState(false);
+    const [user, SetUser] = useState(null);
 
-    const login = () => SetAuthorized(true);
+    const login = (email, password) => {
+        fetch('/api/auth/login',
+        {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                "email": email,
+                "password": password
+            })
+        }).then(res => {
+            if (res.ok) window.location.href="/private";
+        });
+    };
 
-    const signup = () => console.log('signup');
+    const signup = (email, firstname, lastname, password) => {
+        fetch('/api/auth/signup',
+        {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                "email": email,
+                "firstName": firstname,
+                "lastName": lastname,
+                "password": password
+            })
+        }).then(res => {
+            if (res.ok) window.location.href="/login";
+        });
+    };
 
-    const logout = () => SetAuthorized(false);
+    const logout = () => {
+        fetch('/api/auth/logout')
+        .then(() => window.location.href="/login");
+    };
 
     const verify = () => {
         return fetch('/api/auth/verify')
-        .then(res => {
-            SetAuthorized(res.ok);
-            return authorized;
-        });
+        .then(res => res.json())
+        .then(data => {
+            SetUser(data);
+            return true;
+        }).catch(() => {return false})
     };
 
     const data = {
@@ -24,6 +54,7 @@ export const AuthenticationProvider = ({children}) => {
         signup,
         logout,
         verify,
+        user
     };
 
     return (

@@ -9,8 +9,8 @@ export const PrivateWrapper = () => {
   const [authenticated, SetAuthenticated] = useState(false);
 
   useEffect(() => {
-    auth.verify().then(res => {
-      SetAuthenticated(res);
+    auth.verify().then(isAuth => {
+      SetAuthenticated(isAuth);
       SetLoading(false);
     });  
   }, []);
