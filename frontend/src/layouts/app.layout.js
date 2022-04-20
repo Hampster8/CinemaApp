@@ -6,7 +6,7 @@ const AppLayout = () => {
     const auth = useAuth();
 
     const LoggedInData = () => {
-        if (!auth.user) return null;
+        if (!auth.user) return <p>Not logged in!</p>;
 
         return (
             <div>
@@ -18,7 +18,6 @@ const AppLayout = () => {
 
     return (
         <div>
-            <p>Layout</p>
             <LoggedInData />
             <Outlet />
         </div>
