@@ -1,6 +1,6 @@
 import React, { useRef } from 'react';
 import { Link } from 'react-router-dom';
-import { useAuth } from '../contexts/authentication.context';
+import { useAuth } from '../contexts/authentication.contexts';
 
 const SignupForm = () => {
     const emailRef = useRef();

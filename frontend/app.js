@@ -1,6 +1,6 @@
 import React from 'react';
 import { createRoot } from 'react-dom/client';
-import { AuthenticationProvider } from './src/contexts/authentication.context';
+import { AuthenticationProvider } from './src/contexts/authentication.contexts';
 import Router from './src/router';
 
 

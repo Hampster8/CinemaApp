@@ -1,6 +1,6 @@
 import React from 'react';
 import { Outlet } from "react-router-dom";
-import { useAuth } from '../contexts/authentication.context';
+import { useAuth } from '../contexts/authentication.contexts';
 
 const AppLayout = () => {
     const auth = useAuth();

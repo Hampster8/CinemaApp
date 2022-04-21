@@ -1,10 +1,10 @@
 import React from 'react';
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { PrivateWrapper } from './utils/routerWrappers';
-import HomePage from './pages/home.page';
-import AppLayout from './layouts/app.layout';
-import LoginPage from './pages/login.page';
-import SignupPage from './pages/signup.page';
+import { PrivateWrapper } from './utils/routerWrappers.utils';
+import HomePage from './pages/home.pages';
+import AppLayout from './layouts/app.layouts';
+import LoginPage from './pages/login.pages';
+import SignupPage from './pages/signup.pages';
 
 const Router = () => {
     return (

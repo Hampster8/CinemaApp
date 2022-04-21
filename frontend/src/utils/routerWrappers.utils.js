@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Outlet, Navigate } from "react-router-dom";
-import { useAuth } from '../contexts/authentication.context';
+import { useAuth } from '../contexts/authentication.contexts';
 
 export const PrivateWrapper = ({restricted = false, redirectTo}) => {
 

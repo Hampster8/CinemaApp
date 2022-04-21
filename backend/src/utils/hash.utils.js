@@ -1,5 +1,5 @@
 const Crypto = require('crypto');
-const Config = require('../configs/env.config');
+const Config = require('../configs/env.configs');
 
 const hashPassword = (password) => {
     return Crypto

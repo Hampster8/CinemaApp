@@ -2,7 +2,7 @@ const path = require('path');
 const cookieParser = require('cookie-parser');
 const mongoose = require('mongoose');
 const express = require('express');
-const config = require('./src/configs/env.config');
+const config = require('./src/configs/env.configs');
 
 // Connect to MongoDB using Moongose
 mongoose.connect(config.mongodb.database_url, { 

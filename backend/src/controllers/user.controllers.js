@@ -1,5 +1,5 @@
 const JWT = require('jsonwebtoken');
-const Config = require('../configs/env.config');
+const Config = require('../configs/env.configs');
 const User = require('../models/user.models');
 const hashPassword = require('../utils/hash.utils');
 const Validator = require('../utils/validator.utils');
