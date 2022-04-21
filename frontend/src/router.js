@@ -11,16 +11,17 @@ const Router = () => {
         <BrowserRouter>
             <Routes>
                 <Route path="/" element={<AppLayout />}>
+                    
+                    <Route index element={<HomePage />} />
 
                     {/* Public Routes */}
-                    <Route path="/">
-                        <Route index element={<HomePage />} />
+                    <Route path="/" element={<PrivateWrapper restricted={true} redirectTo='/private' />}>
                         <Route path="login" element={<LoginPage />} />
                         <Route path="signup" element={<SignupPage />} />
                     </Route>
 
                     {/* Private Routes */}
-                    <Route path="/private" element={<PrivateWrapper />}>
+                    <Route path="/private" element={<PrivateWrapper redirectTo='/login' />}>
                         <Route index element={<HomePage />} />
                         <Route path="*" element={<HomePage />} />
                     </Route>
