@@ -61,7 +61,9 @@ const logoutUser = async (_req, res) => {
 
 const verifyUser = async (req, res) => {
     const token = req.cookies.token;
-    const id = JWT.decode(token, {complete: true}).payload._id;
+    const jwt = JWT.decode(token, {complete: true});
+    if (jwt === null) return res.status(422).json({error: 'The ID may not be valid!'});
+    const id = jwt.payload._id;
     User.findById(id, (e, user) => {
         if (e) return res.status(422).json({error: 'The ID may not be valid!'});
         return res.status(200).json({
