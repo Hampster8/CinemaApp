@@ -7,6 +7,6 @@ const router = express.Router();
 router.get('/:id', auth.isAuthorized, controller.getAuditoriumById);
 router.get('/', auth.isAuthorized, controller.getAllAuditoriums)
 router.delete('/delete', auth.isAuthorized, controller.deleteAuditorium);
-router.update('/update', auth.isAuthorized, controller.updateAuditorium)
+router.pacth('/update', auth.isAuthorized, controller.updateAuditorium)
 
 module.exports = router;
