@@ -7,8 +7,8 @@ const router = express.Router();
 
 router.get('/audi', controller.getAllAuditoriums)
 router.get('/audi/:id', controller.getAuditoriumById);
-router.delete('/audi/delete',  controller.deleteAuditorium);
-router.patch('/audi/update', controller.updateAuditorium);
+router.delete('/audi/delete/:id',  controller.deleteAuditorium);
+router.patch('/audi/update/:id', controller.updateAuditorium);
 router.post('/audi/create', controller.createAuditorium);
 
 
