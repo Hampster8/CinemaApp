@@ -14,6 +14,7 @@ const router = express();
 router.use(express.urlencoded({ extended: false }))
 router.use(express.json());
 router.use(cookieParser());
+router.use('/api', require('./src/routes/auditorium.routes'));
 
 // Define API rules
 router.use((req, res, next) => {
