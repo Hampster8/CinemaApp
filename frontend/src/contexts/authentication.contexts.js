@@ -1,7 +1,7 @@
-import React from 'react';
+import React, {createContext, useContext} from 'react';
 import useLocalStorage from '../utils/localStorage.utils';
 
-const AuthenticationContext = React.createContext(null);
+const AuthenticationContext = createContext(null);
 export const AuthenticationProvider = ({children}) => {
 
     const [user, SetUser] = useLocalStorage("userData");
@@ -68,4 +68,4 @@ export const AuthenticationProvider = ({children}) => {
     );
 }
 
-export const useAuth = () => React.useContext(AuthenticationContext);
+export const useAuth = () => useContext(AuthenticationContext);
