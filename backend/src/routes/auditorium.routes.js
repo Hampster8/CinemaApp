@@ -4,9 +4,10 @@ const controller = require('../controllers/auditorium.controllers');
 
 const router = express.Router();
 
-router.get('/:id', controller.getAuditoriumById);
+
 router.get('/audi', controller.getAllAuditoriums)
-router.delete('/delete',  controller.deleteAuditorium);
-router.patch('/update', controller.updateAuditorium)
+router.get('/audi/:id', controller.getAuditoriumById);
+router.delete('/audi/delete',  controller.deleteAuditorium);
+router.patch('/audi/update', controller.updateAuditorium)
 
 module.exports = router;

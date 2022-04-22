@@ -12,7 +12,7 @@ const getAllAuditoriums = async (req, res) => {
 
 const getAuditoriumById = async (req, res) => {
     try {
-        const auditorium = await Auditorium.findById(req.params.id)
+        const auditorium = await Auditorium.findOne({_id: req.params.id })
         res.send(auditorium)
     } catch {
         res.status(404)
@@ -52,8 +52,8 @@ const updateAuditorium = async (req, res) => {
 
 module.exports = {
     getAuditoriumById,
-    updateAuditorium,
+    getAllAuditoriums,
     deleteAuditorium,
-    getAllAuditoriums
+    updateAuditorium
 };
 
