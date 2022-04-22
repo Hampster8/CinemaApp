@@ -14,7 +14,7 @@ const router = express();
 router.use(express.urlencoded({ extended: false }))
 router.use(express.json());
 router.use(cookieParser());
-router.use('/api', require('./src/routes/auditorium.routes'));
+
 
 // Define API rules
 router.use((req, res, next) => {
@@ -32,6 +32,7 @@ router.use((req, res, next) => {
 
 // Routes
 router.use('/api/auth', require('./src/routes/user.routes'));
+router.use('/api', require('./src/routes/auditorium.routes'));
 
 // Entry point
 router.use(express.static(path.resolve(__dirname, config.react_build_folder)))
