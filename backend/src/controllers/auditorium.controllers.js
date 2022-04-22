@@ -30,16 +30,16 @@ const deleteAuditorium = async (req, res) => {
     }
 }
 
+
 const updateAuditorium = async (req, res) => {
     try {
-
-        const auditorium = await Auditorium.findById(req.params.id)
+        const auditorium = await Auditorium.findOne({_id: req.params.id })
 
         if (req.body.auditoriumName) {
-            auditorium.name = req.body.auditoriumName
+            auditorium.auditoriumName = req.body.auditoriumName
         }
         if (req.body.auditoriumSeats) {
-            auditorium.seats = req.body.auditoriumSeats
+            auditorium.auditoriumSeats = req.body.auditoriumSeats
         }
         await auditorium.save()
         res.send(auditorium)
@@ -50,10 +50,30 @@ const updateAuditorium = async (req, res) => {
         }
 };
 
+const createAuditorium = async (req, res) => {
+    const id = await Auditorium.findOne({id: req.body.id});
+
+    if(id) {
+        res.status(409)
+        res.send({message: "Auditorium exists"})
+    } else {
+
+        const auditorium = new Auditorium({
+            auditoriumName: req.body.auditoriumName,
+            auditoriumSeats: req.body.auditoriumSeats,
+        });
+
+        await auditorium.save()
+        res.status(201)
+        res.send(auditorium)
+    }
+};
+
 module.exports = {
     getAuditoriumById,
     getAllAuditoriums,
     deleteAuditorium,
-    updateAuditorium
+    updateAuditorium,
+    createAuditorium
 };
 
