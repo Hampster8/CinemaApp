@@ -11,7 +11,7 @@ const getAllMovies = async (req, res) => {
         return res.status(401).json({error: 'Something went wrong, try again!'});
 
     }
-}
+};
 
 const createMovie = async (req, res) => {
 
@@ -29,11 +29,21 @@ const createMovie = async (req, res) => {
     } catch (err) {
         res.status(400);
     }
+};
 
-}
+const findMoviebyId = async (req, res) => {
 
+    try {
+        const post = await movieController.findById(req.params.postId);
+        res.json(post);
+
+    } catch (err) {
+        res.json("User not found try again! " + "Status code: 404");
+    }
+};
 
 module.exports = {
     getAllMovies,
-    createMovie
+    createMovie,
+    findMoviebyId,
 };

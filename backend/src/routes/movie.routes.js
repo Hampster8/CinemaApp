@@ -8,6 +8,7 @@ router.post('/', controller.createMovie);
 
 
 router.get('/', controller.getAllMovies);
+router.get('/:postId', controller.findMoviebyId);
 
 
 module.exports = router;
