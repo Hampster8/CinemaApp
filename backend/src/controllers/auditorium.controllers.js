@@ -20,8 +20,6 @@ const getAuditoriumById = async (req, res) => {
     }
 };
 
-
-
 const deleteAuditorium = async (req, res) => {
     try {
         await Auditorium.deleteOne({_id: req.params.id })
