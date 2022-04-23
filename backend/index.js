@@ -31,6 +31,7 @@ router.use((req, res, next) => {
 
 // Routes
 router.use('/api/auth', require('./src/routes/user.routes'));
+router.use('/api/movies', require('./src/routes/movie.routes'));
 
 // Entry point
 router.use(express.static(path.resolve(__dirname, config.react_build_folder)))
