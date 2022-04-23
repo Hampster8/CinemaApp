@@ -10,5 +10,5 @@ router.post('/', controller.createMovie);
 router.get('/', controller.getAllMovies);
 router.get('/:postId', controller.findMoviebyId);
 
-
+router.delete('/:postId', controller.deleteMovie);
 module.exports = router;

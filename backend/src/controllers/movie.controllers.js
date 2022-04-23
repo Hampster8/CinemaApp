@@ -42,8 +42,21 @@ const findMoviebyId = async (req, res) => {
     }
 };
 
+const deleteMovie = async (req, res) => {
+
+try {
+    const removeMovie = await movieController
+        .remove({ _id: req.params.postId });
+
+    res.json(removeMovie);
+} catch (err) {
+    res.json("Movie not found try again!");
+}
+};
+
 module.exports = {
     getAllMovies,
     createMovie,
     findMoviebyId,
+    deleteMovie,
 };
