@@ -18,7 +18,8 @@ const createMovie = async (req, res) => {
         id: req.params.id,
         title: req.body.title,
         category: req.body.category,
-        playTime: req.body.playTime
+        playTime: req.body.playTime,
+        releaseDate: req.body.releaseDate
     })
 
     try {

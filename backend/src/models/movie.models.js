@@ -14,6 +14,10 @@ const movieSchema = new mongoose.Schema({
 
     playTime: {
         type: Number,
+    },
+
+    releaseDate: {
+        type: Date,
     }
 });
 
