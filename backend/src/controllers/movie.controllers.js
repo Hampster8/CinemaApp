@@ -38,7 +38,7 @@ const findMoviebyId = async (req, res) => {
         res.json(post);
 
     } catch (err) {
-        res.json("User not found try again!");
+        res.json("Movie not found try again!");
     }
 };
 
@@ -65,7 +65,7 @@ const updateMovie = async (req, res) => {
         );
         res.json(updateMovie);
     } catch (err) {
-        res.json("User not found try again!");
+        res.json("Movie not found try again!");
     }
 }
 
