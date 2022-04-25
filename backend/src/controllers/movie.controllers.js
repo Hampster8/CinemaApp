@@ -38,7 +38,7 @@ const findMoviebyId = async (req, res) => {
         res.json(post);
 
     } catch (err) {
-        res.json("User not found try again! " + "Status code: 404");
+        res.json("User not found try again!");
     }
 };
 
@@ -61,7 +61,7 @@ const updateMovie = async (req, res) => {
     try {
         const updateMovie = await movieController.updateOne(
             { _id: req.params.postId },
-            { $set: { title:req.body.title, category: req.body.category, playTime: req.body.playTime}},
+            { $set: { title:req.body.title, category: req.body.category, playTime: req.body.playTime, releaseDate: req.body.releaseDate}},
         );
         res.json(updateMovie);
     } catch (err) {
