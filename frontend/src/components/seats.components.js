@@ -25,7 +25,8 @@ const Seats = () => {
     return (
         <div>
             <p>Seats chosen: {seatsMarked.map(x => x.substring(4) + ' ')}</p>
-            <SeatsSvg clickOnSeat={seatClicked} />
+            <div><ScreenSvg /></div>
+            <div><SeatsSvg clickOnSeat={seatClicked} /></div>
         </div>
     );
 }
@@ -399,6 +400,21 @@ const SeatsSvg = ({clickOnSeat}) => {
             <path style={style.seat} onClick={(e) => clickOnSeat(e.target)} id={'Seat358'} d="M442 479C442 476.239 444.239 474 447 474H457.195C459.956 474 462.195 476.239 462.195 479V489.195C462.195 491.956 459.956 494.195 457.195 494.195H447C444.239 494.195 442 491.956 442 489.195V479Z" fill="#4F4F4F"/>
             <path style={style.seat} onClick={(e) => clickOnSeat(e.target)} id={'Seat359'} d="M468 479C468 476.239 470.239 474 473 474H483.195C485.956 474 488.195 476.239 488.195 479V489.195C488.195 491.956 485.956 494.195 483.195 494.195H473C470.239 494.195 468 491.956 468 489.195V479Z" fill="#4F4F4F"/>
             <path style={style.seat} onClick={(e) => clickOnSeat(e.target)} id={'Seat360'} d="M494 479C494 476.239 496.239 474 499 474H509.195C511.956 474 514.195 476.239 514.195 479V489.195C514.195 491.956 511.956 494.195 509.195 494.195H499C496.239 494.195 494 491.956 494 489.195V479Z" fill="#4F4F4F"/>
+        </svg>
+    );
+}
+
+const ScreenSvg = () => {
+    return (
+        <svg width="601" height="237" viewBox="0 0 601 237" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect width="601" height="236.684" fill="url(#paint0_linear_83_2)" fillOpacity="0.2"/>
+            <rect width="601" height="8.88575" fill="#1F1F1F"/>
+            <defs>
+            <linearGradient id="paint0_linear_83_2" x1="300.5" y1="-107.681" x2="300.5" y2="158.957" gradientUnits="userSpaceOnUse">
+            <stop stopColor="white" stopOpacity="0.2"/>
+            <stop offset="1" stopColor="#B9D7F3" stopOpacity="0"/>
+            </linearGradient>
+            </defs>
         </svg>
     );
 }
