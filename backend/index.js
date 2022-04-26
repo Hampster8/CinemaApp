@@ -32,6 +32,7 @@ router.use((req, res, next) => {
 
 // Routes
 router.use('/api/auth', require('./src/routes/user.routes'));
+router.use('/api', require('./src/routes/booking.routes'));
 router.use('/api', require('./src/routes/auditorium.routes'));
 
 // Entry point

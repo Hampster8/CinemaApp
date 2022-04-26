@@ -15,6 +15,7 @@ These parameters are mandatory in the **.env** file.
 | MONGODB_DATABASE_NAME | Name of the Database in MongoDB                             |
 | HASH_SECRET           | Random string used for hasing, (your secret)                |
 | JWT_SECRET            | Random string used for jwt, (your secret)                   |
+| ADMIN_SECRET          | Random string used for admin token, (your secret)           |
 
 &nbsp;
 
@@ -26,6 +27,7 @@ MONGODB_DATABASE_URL = mongodb://username:password@host:port/database?options...
 MONGODB_DATABASE_NAME = myDatabase
 HASH_SECRET = BNTI7KCUJL5N4MSNVY6DBH5RL1M469M5
 JWT_SECRET = BV9G9MAV6LYD8U6YIBS07AYHVB8QOXF2
+ADMIN_SECRET = BV9G9MAV6LYD8U6YIBS07AYHVB8QOXF2
 ```
 
 &nbsp;
