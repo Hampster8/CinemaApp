@@ -4,6 +4,11 @@ const errorStr =
 'A screening requires the id of a movie and the ' +
 'id of an auditorium ';
 
+const getAllScreenings = async (_req, res) => {
+    const screening = await Screening.find()
+    return res.status(200).json(screening);
+};
+
 const createAScreening = async (req, res) => {
     const screening = new Screening({
         movie: req.body.movie,
@@ -57,6 +62,7 @@ const deleteAScreeningById = async (req, res) => {
 
 
 module.exports = {
+    getAllScreenings,
     createAScreening,
     getAScreeningById,
     getAllScreeningsByDate,

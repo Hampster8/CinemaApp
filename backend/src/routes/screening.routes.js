@@ -3,6 +3,7 @@ const controller = require('../controllers/screening.controllers');
 
 const router = express.Router();
 
+router.get('/', controller.getAllScreenings);
 router.post('/', controller.createAScreening);
 router.get('/:id', controller.getAScreeningById);
 router.get('/date/:date', controller.getAllScreeningsByDate);
