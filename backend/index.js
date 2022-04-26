@@ -39,7 +39,11 @@ router.use('/api', require('./src/routes/auditorium.routes'));
 router.use(express.static(path.join(__dirname, 'public'), {}))
 router.use(express.static(path.join(__dirname, 'public/dist'), {}))
 router.get('*', (_req, res) => {
-    res.sendFile(path.join(__dirname, 'public/dist/index.html'));
+    res.sendFile(path.join(__dirname, 'public/dist/index.html'), (e) => {
+        if (e) return res.status(404).json({
+            message: "Frontend has not been built, run 'npm run build'"
+        }); 
+    });
 });
 
 // Error handling, Request not found
