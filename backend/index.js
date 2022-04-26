@@ -32,8 +32,12 @@ router.use((req, res, next) => {
 
 // Routes
 router.use('/api/auth', require('./src/routes/user.routes'));
+
+router.use('/api/movies', require('./src/routes/movie.routes'));
+
 router.use('/api', require('./src/routes/booking.routes'));
 router.use('/api', require('./src/routes/auditorium.routes'));
+
 
 // Entry point and static folder
 router.use(express.static(path.join(__dirname, 'public'), {}))
