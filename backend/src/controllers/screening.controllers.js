@@ -77,7 +77,6 @@ module.exports = {
     getAScreeningById,
     getAllScreeningsByDate,
     getAllScreeningsByWeek,
-    getAllBookingsForScreening,
     updateScreeningById,
     deleteAScreeningById
 };

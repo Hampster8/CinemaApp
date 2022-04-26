@@ -9,9 +9,9 @@ router.post('/createAScreening', controller.createAScreening);
 router.get('/getAScreeningById', controller.getAScreeningById);
 router.get('/getAllScreeningsByDate', controller.getAllScreeningsByDate);
 router.get('/getAllScreeningsByWeek', controller.getAllScreeningsByWeek);
-router.get('/getAllBookingsForScreening', controller.getAllBookingsForScreening); 
+//router.get('/getAllBookingsForScreening', controller.getAllBookingsForScreening); 
 //Update
-router.update('/xxx', controller.updateScreeningById);
+router.patch('/xxx', controller.updateScreeningById);
 //Delete
 router.delete('/xxx', controller.deleteAScreeningById);
 

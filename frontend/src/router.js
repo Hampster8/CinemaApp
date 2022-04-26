@@ -11,7 +11,7 @@ const Router = () => {
         <BrowserRouter>
             <Routes>
                 <Route path="/" element={<AppLayout />}>
-                    
+
                     <Route index element={<HomePage />} />
 
                     {/* Public Routes */}
