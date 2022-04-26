@@ -60,7 +60,6 @@ module.exports = {
     createAScreening,
     getAScreeningById,
     getAllScreeningsByDate,
-    getAllScreeningsByWeek,
     updateScreeningById,
     deleteAScreeningById
 };
