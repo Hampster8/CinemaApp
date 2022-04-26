@@ -6,7 +6,7 @@ const createBooking = async (req, res) => {
     const bookings = new Bookings(req.body);
     
     bookings.save(e => {
-        if (e) return res.status(422).json({error: "Each booking needs a user id, screening id and seats."});
+        if (e) return res.status(422).json({error: "Each booking needs a userID, screeningID  and seats."});
         return res.sendStatus(200);
     });
     
@@ -41,7 +41,6 @@ const getBookingById = async (req, res) => {
         res.send({ error: "This booking does not exist." })
     }
 };
-   
 
 const deleteBooking = async (req, res) => {
     try {
