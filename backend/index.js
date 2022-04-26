@@ -37,8 +37,9 @@ router.use('/api', require('./src/routes/auditorium.routes'));
 
 // Entry point and static folder
 router.use(express.static(path.join(__dirname, 'public'), {}))
+router.use(express.static(path.join(__dirname, 'public/dist'), {}))
 router.get('*', (_req, res) => {
-    res.sendFile(path.join(__dirname, 'public/index.html'));
+    res.sendFile(path.join(__dirname, 'public/dist/index.html'));
 });
 
 // Error handling, Request not found
