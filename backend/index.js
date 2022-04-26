@@ -15,6 +15,7 @@ router.use(express.urlencoded({ extended: false }))
 router.use(express.json());
 router.use(cookieParser());
 
+
 // Define API rules
 router.use((req, res, next) => {
     // set the CORS policy
@@ -31,12 +32,22 @@ router.use((req, res, next) => {
 
 // Routes
 router.use('/api/auth', require('./src/routes/user.routes'));
+
 router.use('/api/movies', require('./src/routes/movie.routes'));
 
-// Entry point
-router.use(express.static(path.resolve(__dirname, config.react_build_folder)))
+router.use('/api', require('./src/routes/booking.routes'));
+router.use('/api', require('./src/routes/auditorium.routes'));
+
+
+// Entry point and static folder
+router.use(express.static(path.join(__dirname, 'public'), {}))
+router.use(express.static(path.join(__dirname, 'public/dist'), {}))
 router.get('*', (_req, res) => {
-    res.sendFile(path.resolve(__dirname, config.react_build_folder) + '/index.html');
+    res.sendFile(path.join(__dirname, 'public/dist/index.html'), (e) => {
+        if (e) return res.status(404).json({
+            message: "Frontend has not been built, run 'npm run build'"
+        }); 
+    });
 });
 
 // Error handling, Request not found

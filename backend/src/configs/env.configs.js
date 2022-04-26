@@ -8,7 +8,7 @@ module.exports = {
     },
     secrets: {
         hash: process.env.HASH_SECRET,
-        jwt: process.env.JWT_SECRET
-    },
-    react_build_folder: process.env.REACT_BUILD_FOLDER
+        jwt: process.env.JWT_SECRET,
+        admin: process.env.ADMIN_SECRET
+    }
 };

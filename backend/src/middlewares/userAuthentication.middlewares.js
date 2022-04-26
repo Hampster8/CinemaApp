@@ -9,3 +9,14 @@ module.exports.isAuthorized  = function(req, res, next) {
         return next();
     });
 }
+
+module.exports.isAdmin  = function(req, res, next) {
+    const authHeader = String(req.headers['authorization'] || '');
+    if (authHeader.startsWith('Bearer ')) {
+        const token = authHeader.substring(7, authHeader.length);
+        if (token == Config.secrets.admin) {
+            return next();
+        }
+    }
+    return res.sendStatus(401);
+}
