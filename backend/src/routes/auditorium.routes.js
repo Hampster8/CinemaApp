@@ -4,11 +4,11 @@ const controller = require('../controllers/auditorium.controllers');
 const router = express.Router();
 
 
-router.get('/auditorium', controller.getAllAuditoriums)
-router.get('/auditorium/:id', controller.getAuditoriumById);
-router.delete('/auditorium/:id',  controller.deleteAuditorium);
-router.patch('/auditorium/:id', controller.updateAuditorium);
-router.post('/auditorium', controller.createAuditorium);
+router.get('/', controller.getAllAuditoriums)
+router.get('/:id', controller.getAuditoriumById);
+router.delete('/:id',  controller.deleteAuditorium);
+router.patch('/:id', controller.updateAuditorium);
+router.post('/', controller.createAuditorium);
 
 
 module.exports = router;
