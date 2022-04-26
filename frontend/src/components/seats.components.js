@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-const Seats = () => {
+const Seats = ({selectedSeatsUpdate}) => {
 
     const [seatsMarked, SetSeatMarked] = useState([]);
     const [update, SetUpdate] = useState(false);
@@ -20,11 +20,12 @@ const Seats = () => {
         }
         document.getElementById(target.id).style.fill = target.fill
         SetUpdate(!update);
+        selectedSeatsUpdate(seatsMarked.map(x => x.substring(4)));
     }
 
     return (
         <div>
-            <p>Seats chosen: {seatsMarked.map(x => x.substring(4) + ' ')}</p>
+            <p>Seats chosen: {seatsMarked.map(x => x.substring(4) +' ')}</p>
             <div><ScreenSvg /></div>
             <div><SeatsSvg clickOnSeat={seatClicked} /></div>
         </div>
