@@ -35,10 +35,10 @@ router.use('/api/auth', require('./src/routes/user.routes'));
 router.use('/api', require('./src/routes/booking.routes'));
 router.use('/api', require('./src/routes/auditorium.routes'));
 
-// Entry point
-router.use(express.static(path.resolve(__dirname, config.react_build_folder)))
+// Entry point and static folder
+router.use(express.static(path.join(__dirname, 'public'), {}))
 router.get('*', (_req, res) => {
-    res.sendFile(path.resolve(__dirname, config.react_build_folder) + '/index.html');
+    res.sendFile(path.join(__dirname, 'public/index.html'));
 });
 
 // Error handling, Request not found

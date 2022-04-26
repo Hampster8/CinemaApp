@@ -20,7 +20,7 @@ module.exports = {
         },
     },
     entry: './frontend/app.js',
-    output: {path: path.resolve(__dirname, './dist'), filename: '[name].js'},
+    output: {path: path.resolve(__dirname, '../backend/public/'), filename: '[name].js'},
     plugins: [
         new HtmlWebPackPlugin({ 
         template: "./frontend/static/index.html",

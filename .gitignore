@@ -1,4 +1,7 @@
 node_modules
 .env
 **/dist
+backend/public/index.html
+backend/public/main.js
+backend/public/main.js.LICENSE.txt
 .DS_Store
