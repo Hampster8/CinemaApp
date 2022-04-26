@@ -15,6 +15,7 @@ router.use(express.urlencoded({ extended: false }))
 router.use(express.json());
 router.use(cookieParser());
 
+
 // Define API rules
 router.use((req, res, next) => {
     // set the CORS policy
