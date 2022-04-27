@@ -1,10 +1,13 @@
 import React, {useState} from 'react';
+import { useParams } from "react-router-dom";
 
 import MovieInfo from '../components/movieInfo.components';
 import Seats from '../components/seats.components';
 import Screening from '../components/screeening.components';
 
-const BookingPage = () => {
+const MoviePage = () => {
+    const { id } = useParams();
+    console.log(id)
 
     // Stores the marked seats
     const [seatsMarked, SetSeatMarked] = useState([]);
@@ -38,4 +41,4 @@ const style = {
     },
 }
 
-export default BookingPage;
+export default MoviePage;

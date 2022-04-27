@@ -6,7 +6,7 @@ import AppLayout from './layouts/app.layouts';
 import LoginPage from './pages/login.pages';
 import SignupPage from './pages/signup.pages';
 
-import BookingPage from './pages/booking.page';
+import MoviePage from './pages/movie.page';
 
 const Router = () => {
     return (
@@ -15,7 +15,7 @@ const Router = () => {
                 <Route path="/" element={<AppLayout />}>
 
                     <Route index element={<HomePage />} />
-                    <Route path='/booking' element={<BookingPage />} />
+                    <Route path='/movie/:id' element={<MoviePage />} />
 
                     {/* Public Routes */}
                     <Route path="/" element={<PrivateRouteWrapper restricted={true} redirectTo='/private' />}>
