@@ -24,9 +24,9 @@ const Seats = ({selectedSeatsUpdate}) => {
     }
 
     return (
-        <div>
-            <p>Seats chosen: {seatsMarked.map(x => x.substring(4) +' ')}</p>
-            <div><ScreenSvg /></div>
+        <div style={style.container}>
+            <p>Seats chosen (temp element): {seatsMarked.map(x => x.substring(4) +' ')}</p>
+            <div style={style.screen} ><ScreenSvg /></div>
             <div><SeatsSvg clickOnSeat={seatClicked} /></div>
         </div>
     );
@@ -35,6 +35,12 @@ const Seats = ({selectedSeatsUpdate}) => {
 const style = {
     seat: {
         cursor: 'pointer'
+    },
+    container: {
+        textAlign: 'center'
+    },
+    screen: {
+        marginBottom : -100
     }
 }
 
