@@ -6,9 +6,9 @@ const Header = () => {
         <div className='navbar' style={navBar}>
             <h1 style={cinemaStyle}>Cinema</h1>
             <div className='nav-items' style={navItems}>
-                <a href="/allmovies" style={navA}>All movies</a>
-                <a href="/aboutus" style={navA}>About us</a>
-                <a href="/mytickets" style={navA}>My tickets</a>
+                <Link to="/allmovies" style={navA}>All movies</Link>
+                <Link to="/aboutus" style={navA}>About us</Link>
+                <Link to="/mytickets" style={navA}>My tickets</Link>
             </div>
         </div>
 
