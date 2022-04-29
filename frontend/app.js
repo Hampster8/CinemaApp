@@ -3,8 +3,6 @@ import { createRoot } from 'react-dom/client';
 import { AuthenticationProvider } from './src/contexts/authentication.contexts';
 import Router from './src/router';
 
-
-
 // The application
 const App = () => {
     // Current flow:  App -> Context -> Router -> Pages
