@@ -8,11 +8,11 @@ const Header = () => {
     const auth = useAuth();
 
     const LoggedInData = () => {
-        if (!auth.user) return <Link to="/login" className='navItem'>Login</Link>;
+        if (!auth.user) return <Link to="/login" className='link'>Login</Link>;
         return (
             <div>
-                <Link to='/mytickets' className='navItem'>My Tickets</Link>
-                <Link to='/' onClick={() => auth.logout()} className='navItem'>Logout</Link>
+                <Link to='/mytickets' className='link'>My Tickets</Link>
+                <Link to='/' onClick={() => auth.logout()} className='link'>Logout</Link>
             </div>
         );
     };
