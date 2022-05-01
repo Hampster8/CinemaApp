@@ -8,6 +8,7 @@ import Screening from '../components/screeening.components';
 const MoviePage = () => {
     const { id } = useParams(); // id represents imdbID
     const [movieData, SetMovieData] = useState(null);
+    const [update, SetUpdate] = useState(false);
 
     useEffect(() => {
         fetch('/api/movies/' + id)
@@ -17,12 +18,19 @@ const MoviePage = () => {
 
     console.log(movieData);
 
-    // Stores the marked seats
+    // Updates the seats when clicked on
     const [seatsMarked, SetSeatMarked] = useState([]);
-
-    // This function is called when the marked seats is updates (user clicked on a seat)
-    const seatsWasUpdated = (seats) => {
-        SetSeatMarked(seats);
+    const seatClicked = (seat) => {
+        if (seatsMarked.includes(seat)) {
+            for( var i = 0; i < seatsMarked.length; i++){ 
+                if (seatsMarked[i] === seat) {
+                    seatsMarked.splice(i, 1);
+                }
+            }
+        } else {
+            seatsMarked.push(seat);
+        }
+        SetUpdate(!update);
     }
 
     const Page = () => {
@@ -33,7 +41,7 @@ const MoviePage = () => {
                 </div>
                 <div style={style.heroContainer}>
                     <div style={style.rootItem}><MovieInfo /></div>
-                    <div style={{...style.rootItem, ...style.seatsContainer}}><Seats selectedSeatsUpdate={seatsWasUpdated} /></div>
+                    <div style={{...style.rootItem, ...style.seatsContainer}}><Seats seatClicked={seatClicked} seatsMarked={seatsMarked} /></div>
                     <div style={style.rootItem}><Screening /></div>
                 </div>
             </div>
