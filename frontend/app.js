@@ -7,7 +7,7 @@ import Router from './src/router';
 const App = () => {
     // Current flow:  App -> Context -> Router -> Pages
     return (
-        <div style={rootStyle}>
+        <div>
             <AuthenticationProvider>
                 <Router />
             </AuthenticationProvider>
