@@ -1,6 +1,7 @@
 import React from 'react';
 import { Outlet } from "react-router-dom";
 import { useAuth } from '../contexts/authentication.contexts';
+import Header from '../components/header.components';
 
 const AppLayout = () => {
     const auth = useAuth();
@@ -16,8 +17,10 @@ const AppLayout = () => {
         )
     };
 
+
     return (
         <div>
+            <Header />
             <LoggedInData />
             <Outlet />
         </div>
