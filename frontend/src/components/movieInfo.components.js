@@ -18,12 +18,11 @@ const movieStyle = {
     },
 
     infoText: {
-        // face the text
+        color: 'white'
     },
 
     styleButton: {
-        backgroundColor: 'white', // change to the correct color when decided
-        border: 'none'
+        // style for button
     }
 }
 export default MovieInfo;
