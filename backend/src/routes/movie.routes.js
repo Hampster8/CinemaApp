@@ -3,14 +3,9 @@ const controller = require('../controllers/movie.controllers');
 
 const router = express.Router();
 
-// Define the routes for movies
-router.post('/', controller.createMovie);
-
 router.get('/', controller.getAllMovies);
-router.get('/:postId', controller.findMoviebyId);
-
-
-router.delete('/:postId', controller.deleteMovie);
-router.patch('/:postId', controller.updateMovie);
+router.get('/:imdbID', controller.getOneMovie);
+router.post('/', controller.createMovie);
+router.delete('/:imdbID', controller.deleteMovie);
 
 module.exports = router;

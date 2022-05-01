@@ -1,78 +1,52 @@
+const Movie = require('../models/movie.models');
+const Config = require('../configs/env.configs');
+const axios = require('axios').default;
 
-const movieController = require('../models/movie.models');
-
-const getAllMovies = async (req, res) => {
-    try {
-        const getMovies = await movieController.find();
-        res.json(getMovies);
-
-    } catch (err) {
-        return res.status(401).json({error: 'Something went wrong, try again!'});
-    }
-};
+const getAllMovies = async (_req, res) => {
+    const movies = await Movie.find();
+    omdbapi(movies).then((data) => {
+        res.status(200).json(data);
+    });
+}
 
 const createMovie = async (req, res) => {
+    const movie = new Movie(req.body);
+    movie.save(e => {
+        if (e) return res.status(422).json({error: 'requries imdbID and playingNow'});
+        return res.sendStatus(200);
+    });
+}
 
-    const post = new movieController ({
-
-        id: req.params.id,
-        title: req.body.title,
-        category: req.body.category,
-        playTime: req.body.playTime,
-        releaseDate: req.body.releaseDate
+const getOneMovie = async (req, res) => {
+    Movie.find({imdbID: req.params.imdbID}, (e, movies) => {
+        if (e) return res.status(422).json({error: 'Not valid id'});
+        console.log(movies);
+        omdbapi(movies).then((data) => {
+            res.status(200).json(data);
+        });
     })
+}
 
-    try {
-        const saveMovie = await post.save();
-        res.json(saveMovie);
-    } catch (err) {
-        res.status(400);
-    }
-};
-
-// find a specific Movie by _id
-const findMoviebyId = async (req, res) => {
-
-    try {
-        const post = await movieController.findById(req.params.postId);
-        res.json(post);
-
-    } catch (err) {
-        res.json("Movie not found try again!");
-    }
-};
-
-// delete a specific Movie by _id
 const deleteMovie = async (req, res) => {
+    Movie.findOneAndDelete({imdbID: req.params.imdbID}, e => {
+        if (e) return res.status(422).json({error: 'Not valid id'});
+        res.sendStatus(200);
+    })
+}
 
-try {
-    const removeMovie = await movieController
-        .deleteOne({ _id: req.params.postId });
-        res.json(removeMovie);
-
-    } catch (err) {
-        res.json("Movie not found try again!");
+const omdbapi = async (movieRecords) => {
+    var movies = [];
+    for (const movieRecord of movieRecords) {
+        const url = `https://www.omdbapi.com/?apikey=${Config.omdbapi}&i=${movieRecord.imdbID}`;
+        const movie = await axios.get(url);
+        movies.push(movie.data);
     }
-};
-
-// update a specific movie by _id
-const updateMovie = async (req, res) => {
-
-    try {
-        const updateMovie = await movieController.updateOne(
-            { _id: req.params.postId },
-            { $set: { title:req.body.title, category: req.body.category, playTime: req.body.playTime, releaseDate: req.body.releaseDate}},
-        );
-        res.json(updateMovie);
-    } catch (err) {
-        res.json("Movie not found try again!");
-    }
+    return movies;
 }
 
 module.exports = {
+    getOneMovie,
     getAllMovies,
     createMovie,
-    findMoviebyId,
-    deleteMovie,
-    updateMovie,
+    deleteMovie
 };

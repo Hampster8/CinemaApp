@@ -1,23 +1,13 @@
 const mongoose = require('mongoose');
 
 const movieSchema = new mongoose.Schema({
-
-    title: {
+    imdbID: {
         type: String,
-        minlength: 1,
         required: true
     },
-
-    category: {
-        type: String,
-    },
-
-    playTime: {
-        type: Number,
-    },
-
-    releaseDate: {
-        type: Date,
+    playingNow: {
+        type: Boolean,
+        required: true
     }
 });
 
