@@ -7,9 +7,18 @@ const Confirmation = () => {
             <div className='miniBackground' style={miniBackground}>
                 <h1 style={textBox}>Wooo Hoo!</h1>
                 <p style={confirmedBooking}>Your Booking Has Now Been Confirmed!</p>
+                <div style={hdiv}>
                 <p style={headlines}>Ticket ID:</p>
+                <p style={style}>56D23</p>
+                </div>
+                <div style={hdiv}>
                 <p style={headlines}>Date:</p>
+                <p style={style}>Tuesday 10 May 2022</p>
+                </div>
+                <div style={hdiv}>
                 <p style={headlines}>Time:</p>
+                <p style={style}>13:00 PM</p>
+                </div>
 
             </div>
 
@@ -78,6 +87,21 @@ const buttonStyle = {
     height: '57px',
     background: '#009556',
     borderRadius: '10px',
+}
+
+const style = {
+    fontFamily: 'Nunito',
+    fontStyle: 'normal',
+    fontWeight: '700',
+    fontSize: '15px',
+    margin: '15px',
+    color: 'white'
+}
+
+
+const hdiv = {
+    display: 'flex',
+    flexDirection: 'row'
 }
 
 export default Confirmation;
