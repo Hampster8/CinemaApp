@@ -41,11 +41,13 @@ const style = {
         width: 600,
     },
     input: {
+        backgroundColor: '#4F4F4F',
         width: '100%',
         boxSizing: 'border-box',
         marginTop: 20,
         fontSize: 12,
         padding: 10,
+        color: '#fff',
         borderRadius: 5,
         textDecoration: 'none',
         border: 'none',
