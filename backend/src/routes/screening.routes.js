@@ -5,8 +5,8 @@ const router = express.Router();
 
 router.get('/', controller.getAllScreenings);
 router.post('/', controller.createAScreening);
-router.get('/:id', controller.getAScreeningById);
 router.get('/date/:date', controller.getAllScreeningsByDate);
+router.get('/id/:id', controller.getAScreeningById);
 router.patch('/:id', controller.updateScreeningById);
 router.delete('/:id', controller.deleteAScreeningById);
 

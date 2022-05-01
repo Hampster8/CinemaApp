@@ -7,9 +7,11 @@ import Router from './src/router';
 const App = () => {
     // Current flow:  App -> Context -> Router -> Pages
     return (
-        <AuthenticationProvider>
-            <Router />
-        </AuthenticationProvider>
+        <div style={rootStyle}>
+            <AuthenticationProvider>
+                <Router />
+            </AuthenticationProvider>
+        </div>
     );
 }
 

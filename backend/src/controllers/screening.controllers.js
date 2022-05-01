@@ -1,4 +1,6 @@
 const Screening = require('../models/screening.models');
+const Booking = require('../models/booking.models');
+const mongoose = require('mongoose');
 
 const errorStr =
 'A screening requires the id of a movie and the ' +
@@ -6,7 +8,9 @@ const errorStr =
 
 const getAllScreenings = async (_req, res) => {
     const screening = await Screening.find()
-    return res.status(200).json(screening);
+    appendAvaliableSeatsForScreenings(screening).then((data) => {
+        res.status(200).json(data);
+    });
 };
 
 const createAScreening = async (req, res) => {
@@ -24,14 +28,25 @@ const createAScreening = async (req, res) => {
 const getAScreeningById = async (req, res) => {
     const foundScreening = await Screening.findById(req.params.id).exec();
     if (!foundScreening) return res.status(404).send('No Screening with this ID.');
-    res.send(student);
+    appendAvaliableSeatsForScreenings([foundScreening]).then((data) => {
+        res.status(200).json(data);
+    });
 }
 
 
 const getAllScreeningsByDate = async (req, res) => {
-    const screeningsByDay = await Screening.find(req.params.date).exec();
-    if (!screeningsByDay) return res.status(404).send('No Screenings at this Date.')
-    res.send(screeningsByDay);
+    const date = req.params.date;
+    var start = new Date(date);
+    start.setUTCHours(0,0,0,0);
+    var end = new Date(date);
+    end.setUTCHours(23,59,59,999);
+
+    Screening.find({start_time: { '$gte': start, '$lte': end }}, async (e, screenings) => {
+        if (e) return res.status(422).json({error: 'The date may not be valid!'});
+        appendAvaliableSeatsForScreenings(screenings).then((data) => {
+            res.status(200).json(data);
+        });
+    });
 }
 
 
@@ -59,6 +74,26 @@ const deleteAScreeningById = async (req, res) => {
     res.status(200).send(deleteThisScreening);
 }
 
+const appendAvaliableSeatsForScreenings = async (screenings) => {
+    var data = [];
+
+    for (const screening of screenings) {
+        const bookings = await Booking.find({screeningID: screening._id});
+        var seats = [];
+        bookings.forEach(booking => booking.seats.forEach(seat => seats.push(seat)));
+        const seatsObj = {
+            takenSeats: seats
+        }
+
+        const final = {
+            ...screening._doc,
+            ...seatsObj
+        }
+        data.push(final);
+    }
+
+    return data;
+}
 
 
 module.exports = {

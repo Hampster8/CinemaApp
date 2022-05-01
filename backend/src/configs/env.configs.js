@@ -10,5 +10,6 @@ module.exports = {
         hash: process.env.HASH_SECRET,
         jwt: process.env.JWT_SECRET,
         admin: process.env.ADMIN_SECRET
-    }
+    },
+    omdbapi: process.env.OMDBAPI
 };

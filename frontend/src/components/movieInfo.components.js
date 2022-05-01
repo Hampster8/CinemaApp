@@ -1,11 +1,17 @@
 import React from 'react';
 
-const MovieInfo = () => {
+const MovieInfo = ({ imageUrl, infoProps, openInfoCallback }) => {
+
     return (
         <div>
-            <p>Movie</p>
+            <img src={imageUrl} />
+            <p>{infoProps}</p>
+            <button onClick={() => openInfoCallback}>More Information</button>
         </div>
     );
 }
 
+const style = {
+
+}
 export default MovieInfo;
