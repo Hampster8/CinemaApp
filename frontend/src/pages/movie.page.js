@@ -40,7 +40,7 @@ const MoviePage = () => {
                     <h1>{movieData.Title}</h1>
                 </div>
                 <div style={style.heroContainer}>
-                    <div style={style.rootItem}><MovieInfo /></div>
+                    <div style={style.rootItem}><MovieInfo infoProps={movieData.Plot} imageUrl={movieData.Poster} openInfoCallback={() => console.log('temp')} /></div>
                     <div style={{...style.rootItem, ...style.seatsContainer}}><Seats seatClicked={seatClicked} seatsMarked={seatsMarked} /></div>
                     <div style={style.rootItem}><Screening /></div>
                 </div>

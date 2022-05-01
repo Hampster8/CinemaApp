@@ -6,11 +6,12 @@ const MovieInfo = ({ imageUrl, infoProps, openInfoCallback }) => {
         <div>
             <img src={imageUrl} />
             <p>{infoProps}</p>
-            <button onClick={() => openInfoCallback} style={{backgroundColor: transparent}}>More Information</button>
+            <button onClick={() => openInfoCallback}>More Information</button>
         </div>
     );
 }
 
-export default MovieInfo;
+const style = {
 
-// style={{backgroundColor: transparent}}
+}
+export default MovieInfo;
