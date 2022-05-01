@@ -1,14 +1,29 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { useAuth } from '../contexts/authentication.contexts';
 
 const Header = () => {
+
+
+    const auth = useAuth();
+
+    const LoggedInData = () => {
+        if (!auth.user) return <Link to="/login" className='navItem'>Login</Link>;
+        return (
+            <div>
+                <Link to='/mytickets' className='navItem'>My Tickets</Link>
+                <Link to='/' onClick={() => auth.logout()} className='navItem'>Logout</Link>
+            </div>
+        );
+    };
+
     return (
         <div className='navbar' style={style.navBar}>
-            <h1 style={style.cinemaStyle}>Cinema</h1>
+            <Link style={{textDecoration: 'none'}} to='/'><h1 style={style.cinemaStyle}>Cinema</h1></Link>
             <div className='nav-items' style={style.navA}>
-                <Link to="/allmovies" className='navItem'>All movies</Link>
-                <Link to="/aboutus" className='navItem'>About us</Link>
-                <Link to="/mytickets" className='navItem'>My tickets</Link>
+                <Link to='/' className='link'>Movies</Link>
+                <Link to='/about' className='link'>About us</Link>
+                <LoggedInData />
             </div>
         </div>
     );
@@ -31,6 +46,7 @@ const style = {
         background: '#141414',
     },
     navA: {
+        display: 'flex',
         marginTop: 50
     }
 }
