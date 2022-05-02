@@ -7,6 +7,7 @@ import LoginPage from './pages/login.pages';
 import SignupPage from './pages/signup.pages';
 
 import MoviePage from './pages/movie.page';
+import AboutPage from './pages/about.pages';
 
 const Router = () => {
     return (
@@ -16,6 +17,7 @@ const Router = () => {
 
                     <Route index element={<HomePage />} />
                     <Route path='/movie/:id' element={<MoviePage />} />
+                    <Route path='/about' element={<AboutPage />} />
 
                     {/* Public Routes */}
                     <Route path="/" element={<PrivateRouteWrapper restricted={true} redirectTo='/private' />}>
