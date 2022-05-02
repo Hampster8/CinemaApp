@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 
 
 const HomePage = () => {
@@ -18,7 +19,7 @@ const HomePage = () => {
             {moviesData.map((movie, key) => {
                 return (
                     <div key={key}>
-                        <img src={movie.Poster} />
+                        <Link to={'/movie/' + movie.imdbID}><img src={movie.Poster} /></Link>
                         <p>{movie.Title}</p>
                     </div>)
             })}
