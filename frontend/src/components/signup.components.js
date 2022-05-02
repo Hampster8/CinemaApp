@@ -1,6 +1,7 @@
 import React, { useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { useAuth } from '../contexts/authentication.contexts';
+import { secondaryColor } from '../styles/global.styles';
 
 const SignupForm = () => {
 
@@ -24,17 +25,15 @@ const SignupForm = () => {
     }
 
     return (
-        <div style={style.container}>
+        <div style={style.container} className='shadow'>
+            <h1 style={{color: '#fff', fontSize: 30}} >Lets get started!</h1>
             <input style={style.input} ref={el => inputRef.current['email'] = el} placeholder='Email..' />
             <input style={style.input} ref={el => inputRef.current['firstname'] = el} placeholder='Firstname..' />
             <input style={style.input} ref={el => inputRef.current['lastname'] = el} placeholder='Lastname..' />
             <input style={style.input} ref={el => inputRef.current['password'] = el} type='password' placeholder='Password..' />
             <div style={style.actionContainer}>
                 <button onClick={signup}>Signup</button>
-                <div style={style.actionContainerSub}>
-                    <p style={{...style.actionContainerSubItem, opacity: 0.5}}>or</p>
-                    <Link style={style.actionContainerSubItem} className='link' to={'/login'}>Login</Link>
-                </div>
+                <Link style={style.link} className='link' to={'/login'}>Login</Link>
             </div>
         </div>
     );
@@ -43,7 +42,11 @@ const SignupForm = () => {
 const style = {
     container: {
         textAlign: 'center',
-        width: 600,
+        width: 300,
+        backgroundColor: secondaryColor,
+        padding: 40,
+        paddingBottom: 70,
+        borderRadius: 10,
     },
     input: {
         backgroundColor: '#4F4F4F',
@@ -63,16 +66,14 @@ const style = {
     actionContainer: {
         marginTop: 30,
         display: 'flex',
+        justifyContent: 'space-between',
         height : 50
     },
-    actionContainerSub: {
-        display: 'flex'
-    },
-    actionContainerSubItem: {
+    link: {
         height: '100%',
         margin: 0,
         padding: 0,
-        marginLeft: 30,
+        marginLeft: 15,
         paddingTop: 15,
         color: '#fff',
     }

@@ -4,8 +4,14 @@ import LoginForm from '../components/login.components';
 
 const LoginPage = () => {
     return (
-        <div>
-            <LoginForm />
+        <div style={{
+            marginTop: 200,
+            justifyContent: 'center',
+            display: 'flex'
+        }}>
+            <div>
+                <LoginForm />
+            </div>
         </div>
     );
 }

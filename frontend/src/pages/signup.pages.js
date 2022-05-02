@@ -4,8 +4,14 @@ import SignupForm from '../components/signup.components';
 
 const SignupPage = () => {
     return (
-        <div>
-            <SignupForm />
+        <div style={{
+            marginTop: 200,
+            justifyContent: 'center',
+            display: 'flex'
+        }}>
+            <div>
+                <SignupForm />
+            </div>
         </div>
     );
 }

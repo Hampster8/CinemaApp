@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { useAuth } from '../contexts/authentication.contexts';
 
@@ -6,6 +6,8 @@ const Header = () => {
 
 
     const auth = useAuth();
+
+    useEffect(() => {auth.verify()}, []);
 
     const LoggedInData = () => {
         if (!auth.user) return <Link to="/login" className='link'>Login</Link>;
