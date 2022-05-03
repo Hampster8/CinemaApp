@@ -37,10 +37,11 @@ const getAScreeningById = async (req, res) => {
 const getAllScreeningsByDate = async (req, res) => {
     const date = req.params.date;
     var start = new Date(date);
+    start.setDate(start.getDate() + 1 );
     start.setUTCHours(0,0,0,0);
     var end = new Date(date);
+    end.setDate(end.getDate() + 1 );
     end.setUTCHours(23,59,59,999);
-
     Screening.find({start_time: { '$gte': start, '$lte': end }}, async (e, screenings) => {
         if (e) return res.status(422).json({error: 'The date may not be valid!'});
         appendAvaliableSeatsForScreenings(screenings).then((data) => {
