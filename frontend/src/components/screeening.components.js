@@ -3,39 +3,36 @@ import React, { useState } from 'react';
 const Screening = () => {
 
     const [count, SetCount] = useState(0);
-    const [screenigns, SetScreenings] = useState({
+    const [screenings, SetScreenings] = useState({
         loading: true,
         date: null,
-        screenigns: []
+        screenings: []
     });
 
     const GetDate = () => {
         const date = new Date();
-        date.setDate(date.getDate() + count );
-        const year = date.getFullYear();
-        const month = date.getMonth();
-        const day = date.getDate();
-        const final = `${year}-${month}-${day}`;
+        date.setDate(date.getDate() + count);
+        const final = date.toDateString()
 
-        if (!screenigns.date || screenigns.date !== final) {
+        if (!screenings.date || screenings.date !== final) {
             fetch('/api/screenings/date/' + final)
             .then(res => res.json())
             .then(data => {
                 SetScreenings({
                     loading: false,
                     date: final,
-                    screenigns: data
+                    screenings: data
                 });
             });
         }
 
-        if (screenigns.loading) return null;
+        if (screenings.loading) return null;
 
         return (
             <div>
-                <p style={style.date}>{screenigns.date}</p>
+                <p style={style.date}>{screenings.date}</p>
                 {
-                    screenigns.screenigns.map((data, key) => {
+                    screenings.screenings.map((data, key) => {
                         return (
                             <div style={style.screeningContainer} key={key}>
                                 <p style={style.date}>{data.movie}</p>
@@ -57,9 +54,9 @@ const Screening = () => {
 
     return (
         <div>
-            <button onClick={() => IncreaseCount(true)} >Increase date</button>
+            <button onClick={() => IncreaseCount(false)} >&lt;</button>
             <GetDate />
-            <button onClick={() => IncreaseCount(false)}>Decrease Date</button>
+            <button onClick={() => IncreaseCount(true)}>&gt;</button>
         </div>
     );
 }
