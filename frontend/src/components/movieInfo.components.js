@@ -3,30 +3,41 @@ import React from 'react';
 const MovieInfo = ({ imageUrl, infoProps, openInfoCallback }) => {
 
     return (
-        <div style={movieStyle.container}>
-            <img style={movieStyle.iamgeStyle} src={imageUrl} />
-            <p style={movieStyle.infoText}>{infoProps}</p>
-            <button style={movieStyle.styleButton} onClick={() => openInfoCallback}>More Information</button>
+        <div style={style.container}>
+            <img style={style.imageStyle} src={imageUrl} className='shadow' />
+            <p style={style.infoText}>{infoProps}</p>
+            <div style={style.button} className='link' onClick={() => openInfoCallback}>More Information</div>
         </div>
     );
 }
 
-const movieStyle = {
+const style = {
 
     container: {
-        // style for div
+        textAlign: 'center',
+        width: 330
     },
-    iamgeStyle: {
+    imageStyle: {
         border: `5px solid #202121`,
         borderRadius: '10px'
     },
-
     infoText: {
-        color: 'white'
+        textAlign: 'center',
+        color: 'white',
+        opacity: '0.9',
+        fontFamily: 'Nunito',
+        fontStyle: 'bolder'
     },
-
-    styleButton: {
-        // style for button
+    button: {
+        margin: 0,
+        cursor: 'Pointer',
+        fontSize: 18,
+        fontFamily: 'Nunito',
+        fontStyle: 'bolder',
+        letterSpacing: '.1rem',
+        marginTop: 30,
+        fontWeight: 700,
+        color: '#6D6D6D'
     }
 }
 export default MovieInfo;
