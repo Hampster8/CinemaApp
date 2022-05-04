@@ -12,6 +12,12 @@ const MoviePage = () => {
     const { id } = useParams(); // id represents imdbID
     const [movieData, SetMovieData] = useState(null);
     const [update, SetUpdate] = useState(false);
+    const [count, SetCount] = useState(0);
+    const [screenings, SetScreenings] = useState({
+        loading: true,
+        date: null,
+        screenings: []
+    });
 
     useEffect(() => {
         fetch('/api/movies/' + id)
@@ -19,7 +25,6 @@ const MoviePage = () => {
         .then(data => SetMovieData(data[0]))
     }, []);
 
-    // Updates the seats when clicked on
     const [seatsMarked, SetSeatMarked] = useState([]);
     const seatClicked = (seat) => {
         if (seatsMarked.includes(seat)) {
@@ -32,7 +37,13 @@ const MoviePage = () => {
             seatsMarked.push(seat);
         }
         SetUpdate(!update);
-    }
+    };
+
+    const [screeening, SetScreeening] = useState({});
+    const ScreeningClicked = (newScreening, date) => {
+        SetScreeening(newScreening);
+
+    };
 
     const Page = () => {
         return (
@@ -66,7 +77,7 @@ const MoviePage = () => {
                 <div style={style.heroContainer}>
                     <div style={style.rootItem}><MovieInfo infoProps={movieData.Plot} imageUrl={movieData.Poster} openInfoCallback={() => console.log(movieData)} /></div>
                     <div style={{...style.rootItem, ...style.seatsContainer}}><Seats seatClicked={seatClicked} seatsMarked={seatsMarked} /></div>
-                    <div style={style.rootItem}><Screening /></div>
+                    <div style={style.rootItem}><Screening count={count} screenings={screenings} SetScreenings={SetScreenings} SetCount={SetCount} onClickedScreening={ScreeningClicked} /></div>
                 </div>
             </div>
         );

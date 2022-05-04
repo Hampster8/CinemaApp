@@ -1,13 +1,7 @@
 import React, { useState } from 'react';
 
-const Screening = () => {
+const Screening = ({onClickedScreening, count, SetCount, screenings, SetScreenings}) => {
 
-    const [count, SetCount] = useState(0);
-    const [screenings, SetScreenings] = useState({
-        loading: true,
-        date: null,
-        screenings: []
-    });
 
     const GetDate = () => {
         const date = new Date();
@@ -45,7 +39,7 @@ const Screening = () => {
                 {
                     screenings.screenings.map((data, key) => {
                         return (
-                                <div style={style.screeningContainer} key={key}>
+                                <div onClick={() => onClickedScreening(data)} style={style.screeningContainer} key={key}>
                                 <p style={style.date}>{ showMinutesAndHours(data.start_time)} &emsp; {showAmountOfAvailableSeats(data.takenSeats)} seats available.</p>
                             </div>
                         )
@@ -63,8 +57,8 @@ const Screening = () => {
     return (
         <div>
             <button onClick={() => IncreaseCount(false)} >&lt;</button>
-            <GetDate />
             <button onClick={() => IncreaseCount(true)}>&gt;</button>
+            <GetDate />
         </div>
     );
 }
