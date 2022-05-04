@@ -6,7 +6,7 @@ const MovieInfo = ({ imageUrl, infoProps, openInfoCallback }) => {
         <div style={style.container}>
             <img style={style.imageStyle} src={imageUrl} className='shadow' />
             <p style={style.infoText}>{infoProps}</p>
-            <div style={style.button} className='link' onClick={() => openInfoCallback}>More Information</div>
+            <div style={style.button} className='link' onClick={() => openInfoCallback()}>More Information</div>
         </div>
     );
 }
