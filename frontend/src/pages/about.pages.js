@@ -14,8 +14,8 @@ const AboutPage = () => {
                 <a style={styles.text} href="https://github.com/OsvarK" target="_blank">Oscar Karlsson</a><br/>
                 <a style={styles.text} href="https://github.com/Hampster8" target="_blank">Hampus Andersson</a><br/>
                 </p>
-                <b>Link to Project:</b>
-                <div style={{ height: 30, margin: 0, padding: 0}}><a href="https://github.com/Hampster8/CinemaApp" target="_blank"><GitHubSVG /></a></div>
+                <b>Link to Project:</b><br/>
+                <a href="https://github.com/Hampster8/CinemaApp" target="_blank"><GitHubSVG /></a>
             </div>
     );
 }
