@@ -12,8 +12,10 @@ const MoviePage = () => {
     const { id } = useParams(); // id represents imdbID
     const [movieData, SetMovieData] = useState(null);
     const [update, SetUpdate] = useState(false);
-    const [count, SetCount] = useState(0);
+    const [count, UpdateCount] = useState(0);
     const [unavailableSeats, SetUnavailableSeats] = useState([]);
+    const [activeScreening, SetActiveScreening] = useState(null);
+    const [seatsMarked, SetSeatMarked] = useState([]);
     const [screenings, SetScreenings] = useState({
         loading: true,
         date: null,
@@ -26,9 +28,7 @@ const MoviePage = () => {
         .then(data => SetMovieData(data[0]))
     }, []);
 
-    const [seatsMarked, SetSeatMarked] = useState([]);
     const seatClicked = (seat) => {
-        
         const seatId = parseInt(seat.substring(4));
         if (unavailableSeats.includes(seatId)) return;
 
@@ -44,10 +44,15 @@ const MoviePage = () => {
         SetUpdate(!update);
     };
 
-    const [screeening, SetScreeening] = useState({});
+    const SetCount = (value) => {
+        UpdateCount(value);
+        SetActiveScreening(null);
+    }
+
     const ScreeningClicked = (newScreening) => {
-        SetScreeening(newScreening);
+        SetActiveScreening(newScreening);
         SetUnavailableSeats(newScreening.takenSeats);
+        SetSeatMarked([]);
     };
 
     const Page = () => {
@@ -81,8 +86,8 @@ const MoviePage = () => {
                 </div>
                 <div style={style.heroContainer}>
                     <div style={style.rootItem}><MovieInfo infoProps={movieData.Plot} imageUrl={movieData.Poster} openInfoCallback={() => console.log(movieData)} /></div>
-                    <div style={{...style.rootItem, ...style.seatsContainer}}><Seats seatClicked={seatClicked} seatsMarked={seatsMarked} unavailableSeats={unavailableSeats} /></div>
-                    <div style={style.rootItem}><Screening count={count} screenings={screenings} SetScreenings={SetScreenings} SetCount={SetCount} onClickedScreening={ScreeningClicked} /></div>
+                    <div style={{...style.rootItem, ...style.seatsContainer}}><Seats activeScreening={activeScreening} seatClicked={seatClicked} seatsMarked={seatsMarked} unavailableSeats={unavailableSeats} /></div>
+                    <div style={style.rootItem}><Screening activeScreening={activeScreening} count={count} screenings={screenings} SetScreenings={SetScreenings} SetCount={SetCount} onClickedScreening={ScreeningClicked} /></div>
                 </div>
             </div>
         );
