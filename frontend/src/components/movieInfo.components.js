@@ -4,7 +4,7 @@ const MovieInfo = ({ imageUrl, infoProps, openInfoCallback }) => {
 
     return (
         <div style={movieStyle.container}>
-            <img style={movieStyle.iamgeStyle} src={imageUrl} />
+            <img style={movieStyle.imageStyle} src={imageUrl} />
             <p style={movieStyle.infoText}>{infoProps}</p>
             <button style={movieStyle.styleButton} onClick={() => openInfoCallback}>More Information</button>
         </div>
@@ -16,7 +16,7 @@ const movieStyle = {
     container: {
         // style for div
     },
-    iamgeStyle: {
+    imageStyle: {
         border: `5px solid #202121`,
         borderRadius: '10px'
     },
