@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import React from 'react';
 
-const Screening = ({onClickedScreening, count, SetCount, screenings, SetScreenings}) => {
+const Screening = ({onClickedScreening, count, SetCount, screenings, SetScreenings, activeScreening}) => {
 
 
     const GetDate = () => {
@@ -26,20 +26,19 @@ const Screening = ({onClickedScreening, count, SetCount, screenings, SetScreenin
             return (360 - seatsTaken.length)
         }
 
-
         const showMinutesAndHours = (timeObject) => {
             const y = new Date(timeObject)
             return y.getHours() + "." + String(y.getMinutes()).padStart(2, "0");
         }
-
 
         return (
             <div>
                 <p style={style.date}>{screenings.date}</p>
                 {
                     screenings.screenings.map((data, key) => {
+                        const isActive = ((activeScreening && data) && data._id === activeScreening._id);
                         return (
-                                <div onClick={() => onClickedScreening(data)} style={style.screeningContainer} key={key}>
+                                <div onClick={() => onClickedScreening(data)} style={isActive ? style.screeningClicked : style.screeningContainer} key={key}>
                                 <p style={style.date}>{ showMinutesAndHours(data.start_time)} &emsp; {showAmountOfAvailableSeats(data.takenSeats)} seats available.</p>
                             </div>
                         )
@@ -70,11 +69,10 @@ const style = {
     },
     screeningContainer: {
         background: 'grey'
+    },
+    screeningClicked: {
+        background: 'green'
     }
 }
 
 export default Screening;
-/* Row  38
-<p style={style.date}>{data.movie}</p>
-<p style={style.date}>{data.auditorium}</p>
-*/
