@@ -28,17 +28,25 @@ const Screening = () => {
 
         if (screenings.loading) return null;
 
+        const showAmountOfAvailableSeats = (seatsTaken) => {
+            return (360 - seatsTaken.length)
+        }
+
+
+        const showMinutesAndHours = (timeObject) => {
+            const y = new Date(timeObject)
+            return y.getHours() + "." + String(y.getMinutes()).padStart(2, "0");
+        }
+
+
         return (
             <div>
                 <p style={style.date}>{screenings.date}</p>
                 {
                     screenings.screenings.map((data, key) => {
                         return (
-                            <div style={style.screeningContainer} key={key}>
-                                <p style={style.date}>{data.movie}</p>
-                                <p style={style.date}>{data.auditorium}</p>
-                                <p style={style.date}>{data.takenSeats.toString()}</p>
-                                <p style={style.date}>{data.start_time}</p>
+                                <div style={style.screeningContainer} key={key}>
+                                <p style={style.date}>{ showMinutesAndHours(data.start_time)} &emsp; {showAmountOfAvailableSeats(data.takenSeats)} seats available.</p>
                             </div>
                         )
                     })
@@ -63,7 +71,8 @@ const Screening = () => {
 
 const style = {
     date: {
-        color: '#fff'
+        color: '#fff',
+        containerDisplay: 'flex'
     },
     screeningContainer: {
         background: 'grey'
@@ -71,3 +80,7 @@ const style = {
 }
 
 export default Screening;
+/* Row  38
+<p style={style.date}>{data.movie}</p>
+<p style={style.date}>{data.auditorium}</p>
+*/

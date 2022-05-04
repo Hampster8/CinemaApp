@@ -8,7 +8,7 @@ const errorStr =
 
 const getAllScreenings = async (_req, res) => {
     const screening = await Screening.find()
-    appendAvaliableSeatsForScreenings(screening).then((data) => {
+    appendAvailableSeatsForScreening(screening).then((data) => {
         res.status(200).json(data);
     });
 };
@@ -28,7 +28,7 @@ const createAScreening = async (req, res) => {
 const getAScreeningById = async (req, res) => {
     const foundScreening = await Screening.findById(req.params.id).exec();
     if (!foundScreening) return res.status(404).send('No Screening with this ID.');
-    appendAvaliableSeatsForScreenings([foundScreening]).then((data) => {
+    appendAvailableSeatsForScreening([foundScreening]).then((data) => {
         res.status(200).json(data);
     });
 }
@@ -44,7 +44,7 @@ const getAllScreeningsByDate = async (req, res) => {
     end.setUTCHours(23,59,59,999);
     Screening.find({start_time: { '$gte': start, '$lte': end }}, async (e, screenings) => {
         if (e) return res.status(422).json({error: 'The date may not be valid!'});
-        appendAvaliableSeatsForScreenings(screenings).then((data) => {
+        appendAvailableSeatsForScreening(screenings).then((data) => {
             res.status(200).json(data);
         });
     });
@@ -75,7 +75,7 @@ const deleteAScreeningById = async (req, res) => {
     res.status(200).send(deleteThisScreening);
 }
 
-const appendAvaliableSeatsForScreenings = async (screenings) => {
+const appendAvailableSeatsForScreening = async (screenings) => {
     var data = [];
 
     for (const screening of screenings) {
