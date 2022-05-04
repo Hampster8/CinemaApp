@@ -13,6 +13,7 @@ const MoviePage = () => {
     const [movieData, SetMovieData] = useState(null);
     const [update, SetUpdate] = useState(false);
     const [count, SetCount] = useState(0);
+    const [unavailableSeats, SetUnavailableSeats] = useState([]);
     const [screenings, SetScreenings] = useState({
         loading: true,
         date: null,
@@ -27,6 +28,10 @@ const MoviePage = () => {
 
     const [seatsMarked, SetSeatMarked] = useState([]);
     const seatClicked = (seat) => {
+        
+        const seatId = parseInt(seat.substring(4));
+        if (unavailableSeats.includes(seatId)) return;
+
         if (seatsMarked.includes(seat)) {
             for( var i = 0; i < seatsMarked.length; i++){ 
                 if (seatsMarked[i] === seat) {
@@ -40,9 +45,9 @@ const MoviePage = () => {
     };
 
     const [screeening, SetScreeening] = useState({});
-    const ScreeningClicked = (newScreening, date) => {
+    const ScreeningClicked = (newScreening) => {
         SetScreeening(newScreening);
-
+        SetUnavailableSeats(newScreening.takenSeats);
     };
 
     const Page = () => {
@@ -76,7 +81,7 @@ const MoviePage = () => {
                 </div>
                 <div style={style.heroContainer}>
                     <div style={style.rootItem}><MovieInfo infoProps={movieData.Plot} imageUrl={movieData.Poster} openInfoCallback={() => console.log(movieData)} /></div>
-                    <div style={{...style.rootItem, ...style.seatsContainer}}><Seats seatClicked={seatClicked} seatsMarked={seatsMarked} /></div>
+                    <div style={{...style.rootItem, ...style.seatsContainer}}><Seats seatClicked={seatClicked} seatsMarked={seatsMarked} unavailableSeats={unavailableSeats} /></div>
                     <div style={style.rootItem}><Screening count={count} screenings={screenings} SetScreenings={SetScreenings} SetCount={SetCount} onClickedScreening={ScreeningClicked} /></div>
                 </div>
             </div>

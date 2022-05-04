@@ -1,8 +1,13 @@
 import React, { useEffect } from 'react';
 
-const Seats = ({seatClicked, seatsMarked}) => {
+const Seats = ({seatClicked, seatsMarked, unavailableSeats}) => {
 
     useEffect(() => {
+
+        unavailableSeats.forEach(id => {
+            document.getElementById('Seat'+id).style.fill = '#1F1F1F';
+        });
+
         seatsMarked.forEach(id => {
             document.getElementById(id).style.fill = 'green';
         });
