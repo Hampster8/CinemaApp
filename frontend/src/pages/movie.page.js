@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
-import { useParams } from "react-router-dom";
-
-import { primaryColor, secondaryColor, TimeSvg, DateSvg, TagsSvg } from '../styles/global.styles';
+import { Link, useParams } from "react-router-dom";
+import { secondaryColor, TimeSvg, DateSvg, TagsSvg } from '../styles/global.styles';
+import { useAuth } from '../contexts/authentication.contexts';
 
 import MovieInfo from '../components/movieInfo.components';
 import Seats from '../components/seats.components';
@@ -9,6 +9,7 @@ import Screening from '../components/screeening.components';
 
 
 const MoviePage = () => {
+    const auth = useAuth();
     const { id } = useParams(); // id represents imdbID
     const [movieData, SetMovieData] = useState(null);
     const [update, SetUpdate] = useState(false);
@@ -29,6 +30,7 @@ const MoviePage = () => {
     }, []);
 
     const seatClicked = (seat) => {
+        if (activeScreening == null) return;
         const seatId = parseInt(seat.substring(4));
         if (unavailableSeats.includes(seatId)) return;
 
@@ -54,6 +56,16 @@ const MoviePage = () => {
         SetUnavailableSeats(newScreening.takenSeats);
         SetSeatMarked([]);
     };
+
+    const CreateBookingBtn = () => {
+        if (!auth.user) return <Link to='/login'><button>Login to create booking</button></Link>
+        else return <button onClick={() => createBooking()}>Create Booking</button>
+    }
+
+    const createBooking = () => {
+        console.log(activeScreening);
+        console.log(seatsMarked);
+    }
 
     const Page = () => {
         return (
@@ -87,7 +99,10 @@ const MoviePage = () => {
                 <div style={style.heroContainer}>
                     <div style={style.rootItem}><MovieInfo infoProps={movieData.Plot} imageUrl={movieData.Poster} openInfoCallback={() => console.log(movieData)} /></div>
                     <div style={{...style.rootItem, ...style.seatsContainer}}><Seats activeScreening={activeScreening} seatClicked={seatClicked} seatsMarked={seatsMarked} unavailableSeats={unavailableSeats} /></div>
-                    <div style={style.rootItem}><Screening activeScreening={activeScreening} count={count} screenings={screenings} SetScreenings={SetScreenings} SetCount={SetCount} onClickedScreening={ScreeningClicked} /></div>
+                    <div style={style.rootItem}>
+                        <Screening activeScreening={activeScreening} count={count} screenings={screenings} SetScreenings={SetScreenings} SetCount={SetCount} onClickedScreening={ScreeningClicked} />
+                        <CreateBookingBtn />
+                    </div>
                 </div>
             </div>
         );
