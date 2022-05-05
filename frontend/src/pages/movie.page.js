@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import { Link, useParams } from "react-router-dom";
 import { secondaryColor, TimeSvg, DateSvg, TagsSvg } from '../styles/global.styles';
-import { useAuth } from '../contexts/authentication.contexts';
+import { useAuth, setToast } from '../contexts/authentication.contexts';
 
 import MovieInfo from '../components/movieInfo.components';
 import Seats from '../components/seats.components';
@@ -65,6 +65,51 @@ const MoviePage = () => {
     const createBooking = () => {
         console.log(activeScreening);
         console.log(seatsMarked);
+        
+        if (!auth.user) {
+            auth.setToast({
+                msg: "You need to be logged in to make a booking",
+                warning: true,
+                render: true
+            });
+            return;
+        };
+
+        
+        if (!activeScreening) {
+            auth.setToast({
+                msg: "You need to select a screening to make a booking",
+                warning: true,
+                render: true
+            });
+            return;
+        }
+
+        if (seatsMarked.length < 1) {
+            auth.setToast({
+                msg: "Atleast one seat is required to make a booking",
+                warning: true,
+                render: true
+            });
+            return;
+        }
+
+        let seats = [...seatsMarked];
+        seats = seats.map(x => x = parseInt(x.substring(4)));
+
+        fetch('/api/bookings',
+        {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                "screeningID": activeScreening._id,
+                "seats": seats,
+            })
+        }).then(res => {
+            if (res.ok) {
+                window.location.href="/mybookings"
+            }
+        });
     }
 
     const Page = () => {

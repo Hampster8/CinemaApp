@@ -78,21 +78,12 @@ export const AuthenticationProvider = ({children}) => {
         })
     };
 
-    const data = {
-        login,
-        signup,
-        logout,
-        verify,
-        user,
-        setToast
-    };
-
-
     const [toast, setToast] = useState({
         msg: '',
         render: false,
         warning: false
     })
+
     const Toast = () => {
         if (!toast.render) return null;
         return (
@@ -116,6 +107,18 @@ export const AuthenticationProvider = ({children}) => {
             </div>
         );
     }
+
+   
+
+    const data = {
+        login,
+        signup,
+        logout,
+        verify,
+        user,
+        setToast
+    };
+
     return (
         <AuthenticationContext.Provider value={data}>
             <div>
