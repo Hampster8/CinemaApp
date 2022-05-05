@@ -2,9 +2,16 @@
 const Bookings = require('../models/booking.models');
 
 const createBooking = async (req, res) => {
+    const token = req.cookies.token;
+    const jwt = JWT.decode(token, {complete: true});
+    if (jwt === null) return res.status(422).json({error: 'The ID may not be valid!'});
+    const userId = jwt.payload._id;
+    const bookings = new Bookings({
+        userID: userId,
+        screeningID: req.body.screeningID,
+        seats: req.body.seats
+    });
 
-    const bookings = new Bookings(req.body);
-    
     bookings.save(e => {
         if (e) return res.status(422).json({error: "Each booking needs a userID, screeningID  and seats."});
         return res.sendStatus(200);
