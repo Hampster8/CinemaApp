@@ -11,5 +11,6 @@ module.exports = {
         jwt: process.env.JWT_SECRET,
         admin: process.env.ADMIN_SECRET
     },
-    omdbapi: process.env.OMDBAPI
+    omdbapi: process.env.OMDBAPI,
+    dummyData: process.env.USE_DUMMY_DATA
 };

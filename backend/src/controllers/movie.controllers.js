@@ -1,6 +1,7 @@
 const Movie = require('../models/movie.models');
 const Config = require('../configs/env.configs');
 const axios = require('axios').default;
+const cleanUp = require('../utils/cleanUp.utils');
 
 const getAllMovies = async (_req, res) => {
     const movies = await Movie.find();
@@ -24,6 +25,8 @@ const getOneMovie = async (req, res) => {
             res.status(200).json(data);
         });
     })
+
+    cleanUp();
 }
 
 const deleteMovie = async (req, res) => {

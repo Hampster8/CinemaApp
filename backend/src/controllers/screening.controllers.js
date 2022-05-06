@@ -1,6 +1,6 @@
 const Screening = require('../models/screening.models');
 const Booking = require('../models/booking.models');
-const mongoose = require('mongoose');
+
 
 const errorStr =
 'A screening requires the id of a movie and the ' +
@@ -49,7 +49,6 @@ const getAllScreeningsByDate = async (req, res) => {
         });
     });
 }
-
 
 const updateScreeningById = async (req, res) => {
     const updateScreening = await Screening.findOneAndUpdate(req.params.id,
