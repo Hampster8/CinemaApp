@@ -14,7 +14,6 @@ const cleanUp = async () => {
     await bookingModels.deleteMany({createdAt: { $lte: yesterday }});
 
     if (config.dummyData) await dummyData();
-    console.log("Removed old screenings and bookings ", config.dummyData ? "also validated dummy data" : "")
 }
 
 
@@ -39,12 +38,7 @@ const dummyData = async () => {
             for (const audi of auditoriums) {
                 const moveToShow = movies[Math.floor(Math.random()*movies.length)];
                 const found = await screening.findOne({start_time: date});
-                if (found != null) continue;
-                new screening({
-                    movie: moveToShow._id,
-                    auditorium: audi._id,
-                    start_time: date
-                }).save();
+
             }
         }
     }
