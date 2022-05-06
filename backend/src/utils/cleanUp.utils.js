@@ -8,10 +8,9 @@ const config = require('../configs/env.configs');
 const cleanUp = async () => {
 
     // Delete old screenings and bookings
-    const yesterday = new Date();
-    yesterday.setDate(yesterday.getDate() - 1);
-    await screening.deleteMany({start_time: { $lte: yesterday }});
-    await bookingModels.deleteMany({createdAt: { $lte: yesterday }});
+    const currentDate = new Date();
+    await screening.deleteMany({start_time: { $lte: currentDate }});
+    await bookingModels.deleteMany({createdAt: { $lte: currentDate }});
 
     if (config.dummyData) await dummyData();
 }
@@ -25,19 +24,33 @@ const dummyData = async () => {
     const movies = await movie.find({playingNow: true});
     const auditoriums = await auditorium.find();
     const currentDate = new Date();
-    // For every day, (current day) -> (currentDay + 20 days)
-    for (let day = 1; day < 21; day++) {
-        const date = new Date(currentDate);
-        date.setDate(date.getDate() + day );
-        date.setUTCHours(8,0,0,0);
 
-         // every third hour, between 8 -> 23 = 5h
-        for (let hour = 0; hour < 5; hour++) {
-            date.setUTCHours((8 + (hour * 1)),0,0,0);
+    // for every auditorium
+    for (let audi = 0; audi < auditoriums.length; audi++) {
 
-            for (const audi of auditoriums) {
+        // For every day
+        for (let day = 0; day < 1; day++) {
+
+            var date = new Date(currentDate);
+            date.setDate(date.getDate() + day );
+            date.setUTCHours(0,0,0,0);
+
+             // every third hour, between 8 -> 23 = 5h
+            for (let hour = 8; hour < 26; hour = hour + 3) {
+
                 const moveToShow = movies[Math.floor(Math.random()*movies.length)];
-                const found = await screening.findOne({start_time: date});
+
+                date.setUTCHours(hour,0,0,0);
+
+                const found = await screening.findOne({auditorium: auditoriums[audi]._id, start_time: date});
+
+                if (found) continue;
+
+                await new screening({
+                    movie: moveToShow._id,
+                    auditorium: auditoriums[audi]._id,
+                    start_time: date
+                }).save();
 
             }
         }
