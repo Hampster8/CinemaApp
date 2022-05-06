@@ -14,7 +14,7 @@ const cleanUp = async () => {
     await bookingModels.deleteMany({createdAt: { $lte: yesterday }});
 
     if (config.dummyData) await dummyData();
-    console.log("Removed old screenings and bookings ", config.dummyData ? "also added dummy data" : "")
+    console.log("Removed old screenings and bookings ", config.dummyData ? "also validated dummy data" : "")
 }
 
 
