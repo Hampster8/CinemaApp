@@ -19,10 +19,10 @@ const createMovie = async (req, res) => {
 }
 
 const getOneMovie = async (req, res) => {
-    Movie.find({imdbID: req.params.imdbID}, (e, movies) => {
+    Movie.findOne({imdbID: req.params.imdbID}, (e, foundMovie) => {
         if (e) return res.status(422).json({error: 'Not valid id'});
-        omdbapi(movies).then((data) => {
-            res.status(200).json(data);
+        omdbapi([foundMovie]).then((data) => {
+            res.status(200).json({...data[0], ...foundMovie._doc});
         });
     })
 

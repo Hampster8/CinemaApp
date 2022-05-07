@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import { Link, useParams } from "react-router-dom";
 import { secondaryColor, TimeSvg, DateSvg, TagsSvg } from '../styles/global.styles';
-import { useAuth, setToast } from '../contexts/authentication.contexts';
+import { useAuth } from '../contexts/authentication.contexts';
 
 import MovieInfo from '../components/movieInfo.components';
 import Seats from '../components/seats.components';
@@ -26,7 +26,9 @@ const MoviePage = () => {
     useEffect(() => {
         fetch('/api/movies/' + id)
         .then(res => res.json())
-        .then(data => SetMovieData(data[0]))
+        .then(data => {
+            SetMovieData(data)
+        })
     }, []);
 
     const seatClicked = (seat) => {
@@ -145,7 +147,7 @@ const MoviePage = () => {
                     <div style={style.rootItem}><MovieInfo infoProps={movieData.Plot} imageUrl={movieData.Poster} openInfoCallback={() => console.log(movieData)} /></div>
                     <div style={{...style.rootItem, ...style.seatsContainer}}><Seats activeScreening={activeScreening} seatClicked={seatClicked} seatsMarked={seatsMarked} unavailableSeats={unavailableSeats} /></div>
                     <div style={style.rootItem}>
-                        <Screening activeScreening={activeScreening} count={count} screenings={screenings} SetScreenings={SetScreenings} SetCount={SetCount} onClickedScreening={ScreeningClicked} />
+                        <Screening movieId={movieData._id} activeScreening={activeScreening} count={count} screenings={screenings} SetScreenings={SetScreenings} SetCount={SetCount} onClickedScreening={ScreeningClicked} />
                         <CreateBookingBtn />
                     </div>
                 </div>

@@ -1,15 +1,15 @@
 import React from 'react';
 
-const Screening = ({onClickedScreening, count, SetCount, screenings, SetScreenings, activeScreening}) => {
+const Screening = ({movieId, onClickedScreening, count, SetCount, screenings, SetScreenings, activeScreening}) => {
 
 
     const GetDate = () => {
         const date = new Date();
         date.setDate(date.getDate() + count);
-        const final = date.toDateString()
+        const final = date.toDateString();
 
         if (!screenings.date || screenings.date !== final) {
-            fetch('/api/screenings/date/' + final)
+            fetch('/api/screenings/date/' + final + '/' + movieId)
             .then(res => res.json())
             .then(data => {
                 SetScreenings({

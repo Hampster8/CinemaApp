@@ -34,15 +34,16 @@ const getAScreeningById = async (req, res) => {
 }
 
 
-const getAllScreeningsByDate = async (req, res) => {
+const getAllScreeningsByDateAndMovieId = async (req, res) => {
     const date = req.params.date;
+    const movieId = req.params.movieId;
     var start = new Date(date);
     start.setDate(start.getDate() + 1 );
     start.setUTCHours(0,0,0,0);
     var end = new Date(date);
     end.setDate(end.getDate() + 1 );
     end.setUTCHours(23,59,59,999);
-    Screening.find({start_time: { '$gte': start, '$lte': end }}, async (e, screenings) => {
+    Screening.find({start_time: { '$gte': start, '$lte': end }, movie: movieId }, async (e, screenings) => {
         if (e) return res.status(422).json({error: 'The date may not be valid!'});
         appendAvailableSeatsForScreening(screenings).then((data) => {
             res.status(200).json(data);
@@ -100,7 +101,7 @@ module.exports = {
     getAllScreenings,
     createAScreening,
     getAScreeningById,
-    getAllScreeningsByDate,
+    getAllScreeningsByDateAndMovieId,
     updateScreeningById,
     deleteAScreeningById
 };
