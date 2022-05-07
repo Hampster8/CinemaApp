@@ -12,6 +12,7 @@ const Screening = ({movieId, onClickedScreening, count, SetCount, screenings, Se
             fetch('/api/screenings/date/' + final + '/' + movieId)
             .then(res => res.json())
             .then(data => {
+                console.log(data);
                 SetScreenings({
                     loading: false,
                     date: final,
@@ -39,8 +40,9 @@ const Screening = ({movieId, onClickedScreening, count, SetCount, screenings, Se
                         const isActive = ((activeScreening && data) && data._id === activeScreening._id);
                         return (
                                 <div onClick={() => onClickedScreening(data)} style={isActive ? style.screeningClicked : style.screeningContainer} key={key}>
-                                <p style={style.date}>{ showMinutesAndHours(data.start_time)} &emsp; {showAmountOfAvailableSeats(data.takenSeats)} seats available.</p>
-                            </div>
+                                    <p style={style.date}>{data.auditoriumName}</p>
+                                    <p style={style.date}>{ showMinutesAndHours(data.start_time)} &emsp; {showAmountOfAvailableSeats(data.takenSeats)} seats available.</p>
+                                </div>
                         )
                     })
                 }

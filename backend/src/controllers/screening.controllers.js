@@ -1,5 +1,6 @@
 const Screening = require('../models/screening.models');
 const Booking = require('../models/booking.models');
+const Auditorium = require('../models/auditorium.models');
 
 
 const errorStr =
@@ -80,15 +81,19 @@ const appendAvailableSeatsForScreening = async (screenings) => {
 
     for (const screening of screenings) {
         const bookings = await Booking.find({screeningID: screening._id});
+        const auditorium = await Auditorium.findById(screening.auditorium);
+
         var seats = [];
         bookings.forEach(booking => booking.seats.forEach(seat => seats.push(seat)));
+
         const seatsObj = {
             takenSeats: seats
         }
 
         const final = {
             ...screening._doc,
-            ...seatsObj
+            ...seatsObj,
+            ...auditorium._doc
         }
         data.push(final);
     }
