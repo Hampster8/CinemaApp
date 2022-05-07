@@ -1,4 +1,5 @@
 import React from 'react';
+import { secondaryColor, tertiaryColor } from '../styles/global.styles';
 
 const Screening = ({movieId, onClickedScreening, count, SetCount, screenings, SetScreenings, activeScreening}) => {
 
@@ -12,7 +13,6 @@ const Screening = ({movieId, onClickedScreening, count, SetCount, screenings, Se
             fetch('/api/screenings/date/' + final + '/' + movieId)
             .then(res => res.json())
             .then(data => {
-                console.log(data);
                 SetScreenings({
                     loading: false,
                     date: final,
@@ -32,6 +32,7 @@ const Screening = ({movieId, onClickedScreening, count, SetCount, screenings, Se
             return y.getHours() + "." + String(y.getMinutes()).padStart(2, "0");
         }
 
+
         return (
             <div>
                 <p style={style.date}>{screenings.date}</p>
@@ -39,9 +40,10 @@ const Screening = ({movieId, onClickedScreening, count, SetCount, screenings, Se
                     screenings.screenings.map((data, key) => {
                         const isActive = ((activeScreening && data) && data._id === activeScreening._id);
                         return (
-                                <div onClick={() => onClickedScreening(data)} style={isActive ? style.screeningClicked : style.screeningContainer} key={key}>
-                                    <p style={style.date}>{data.auditoriumName}</p>
-                                    <p style={style.date}>{ showMinutesAndHours(data.start_time)} &emsp; {showAmountOfAvailableSeats(data.takenSeats)} seats available.</p>
+                                <div onClick={() => onClickedScreening(data)} style={isActive ? {...style.screeningContainer, ...style.screeningClicked} : style.screeningContainer} key={key}>
+                                    <div style={{display: 'flex'}} ><p style={style.itemGhost}>Auditorium:</p> <p style={style.item}>{data.auditoriumName}</p></div>
+                                    <div style={{display: 'flex'}} ><p style={style.itemGhost}>Starts at:</p> <p style={style.item}>{showMinutesAndHours(data.start_time)}</p></div>
+                                    <div style={{display: 'flex'}} ><p style={style.itemGhost}>Seats available:</p> <p style={style.item}>{showAmountOfAvailableSeats(data.takenSeats)}</p></div>
                                 </div>
                         )
                     })
@@ -56,24 +58,51 @@ const Screening = ({movieId, onClickedScreening, count, SetCount, screenings, Se
     }
 
     return (
-        <div>
-            <button onClick={() => IncreaseCount(false)} >&lt;</button>
-            <button onClick={() => IncreaseCount(true)}>&gt;</button>
+        <div style={style.container} className='shadow'>
+            <p style={{color: '#fff', opacity: 0.5}}>Increase or Decrease Date</p>
+            <button style={style.button} onClick={() => IncreaseCount(false)} >&lt;</button>
+            <button style={style.button} onClick={() => IncreaseCount(true)}>&gt;</button>
             <GetDate />
         </div>
     );
 }
 
 const style = {
+    container: {
+        paddingTop: 20,
+        borderRadius: 5,
+        backgroundColor: secondaryColor,
+        paddingBottom: 10
+    },
     date: {
         color: '#fff',
-        containerDisplay: 'flex'
+    },
+    itemGhost: {
+        fontSize: 15,
+        color: '#fff',
+        opacity: 0.4,
+        margin: 4,
+        textAlign: 'right'
+    },
+    item: {
+        color: '#fff',
+        fontSize: 15,
+        margin: 4,
+        textAlign: 'left'
     },
     screeningContainer: {
-        background: 'grey'
+        background: '#292929',
+        margin: 20,
+        marginBottom: 0,
+        borderRadius: 5,
+        cursor: 'pointer',
+        padding: 2
     },
     screeningClicked: {
-        background: 'green'
+        background: '#4F4F4F',
+    },
+    button: {
+        margin: 4
     }
 }
 

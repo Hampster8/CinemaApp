@@ -65,9 +65,7 @@ const MoviePage = () => {
     }
 
     const createBooking = () => {
-        console.log(activeScreening);
-        console.log(seatsMarked);
-        
+
         if (!auth.user) {
             auth.setToast({
                 msg: "You need to be logged in to make a booking",
@@ -147,8 +145,12 @@ const MoviePage = () => {
                     <div style={style.rootItem}><MovieInfo infoProps={movieData.Plot} imageUrl={movieData.Poster} openInfoCallback={() => console.log(movieData)} /></div>
                     <div style={{...style.rootItem, ...style.seatsContainer}}><Seats activeScreening={activeScreening} seatClicked={seatClicked} seatsMarked={seatsMarked} unavailableSeats={unavailableSeats} /></div>
                     <div style={style.rootItem}>
-                        <Screening movieId={movieData._id} activeScreening={activeScreening} count={count} screenings={screenings} SetScreenings={SetScreenings} SetCount={SetCount} onClickedScreening={ScreeningClicked} />
-                        <CreateBookingBtn />
+                        <div style={{width: 330, float: 'right'}} >
+                            <Screening movieId={movieData._id} activeScreening={activeScreening} count={count} screenings={screenings} SetScreenings={SetScreenings} SetCount={SetCount} onClickedScreening={ScreeningClicked} />
+                            <div style={{marginTop: 20}} >
+                                <CreateBookingBtn />
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -197,9 +199,12 @@ const style = {
     rootItem: {
         display: 'inline',
         width: '100%',
+        alignContent: 'center',
+        textAlign: 'center'
     },
     seatsContainer: {
-        
+        paddingLeft: 100,
+        paddingRight: 100
     },
 }
 

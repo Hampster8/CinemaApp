@@ -91,9 +91,9 @@ const appendAvailableSeatsForScreening = async (screenings) => {
         }
 
         const final = {
+            ...auditorium._doc,
             ...screening._doc,
             ...seatsObj,
-            ...auditorium._doc
         }
         data.push(final);
     }
