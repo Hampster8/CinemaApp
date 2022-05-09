@@ -21,7 +21,7 @@ const dummyData = async () => {
 
 
     const CLEAR_ALL_DUMMY_DATA = false;    // Enable to clear all dummy data
-    const AMOUNT_OF_DAYS_TO_POPULATE = 30;    // Enable to clear all dummy data
+    const AMOUNT_OF_DAYS_TO_POPULATE = 30;
 
 
     const dummyUser = await user.findOne({email: 'dummy@dummy.com'});
