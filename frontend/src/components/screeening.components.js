@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { secondaryColor, tertiaryColor } from '../styles/global.styles';
 
 const Screening = ({movieId, onClickedScreening, count, SetCount, screenings, SetScreenings, activeScreening}) => {

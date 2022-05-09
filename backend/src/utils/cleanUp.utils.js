@@ -9,6 +9,7 @@ const cleanUp = async () => {
 
     // Delete old screenings and bookings
     const currentDate = new Date();
+    currentDate.setDate(currentDate.getDate() + -2 );
     await screening.deleteMany({start_time: { $lte: currentDate }});
     await booking.deleteMany({createdAt: { $lte: currentDate }});
 
@@ -18,19 +19,28 @@ const cleanUp = async () => {
 
 const dummyData = async () => {
 
-    await screening.deleteMany();
-    // return;
+
+    const CLEAR_ALL_DUMMY_DATA = false;    // Enable to clear all dummy data
+    const AMOUNT_OF_DAYS_TO_POPULATE = 30;    // Enable to clear all dummy data
+
+
+    const dummyUser = await user.findOne({email: 'dummy@dummy.com'});
+    if (CLEAR_ALL_DUMMY_DATA) {
+        await screening.deleteMany();
+        await booking.deleteMany({userID: dummyUser._id});
+        return;
+    }
 
     const movies = await movie.find({playingNow: true});
     const auditoriums = await auditorium.find();
     const currentDate = new Date();
-    const dummyUser = await user.findOne({email: 'dummy@dummy.com'});
+
 
     // for every auditorium
     for (let audi = 0; audi < auditoriums.length; audi++) {
 
         // For every day
-        for (let day = 0; day < 1; day++) {
+        for (let day = 0; day < AMOUNT_OF_DAYS_TO_POPULATE; day++) {
 
             var date = new Date(currentDate);
             date.setDate(date.getDate() + day );
