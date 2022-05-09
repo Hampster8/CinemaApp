@@ -2,7 +2,7 @@ const movie = require('../models/movie.models');
 const user = require('../models/user.models');
 const screening = require('../models/screening.models');
 const auditorium = require('../models/auditorium.models');
-const bookingModels = require('../models/booking.models');
+const booking = require('../models/booking.models');
 const config = require('../configs/env.configs');
 
 const cleanUp = async () => {
@@ -10,7 +10,7 @@ const cleanUp = async () => {
     // Delete old screenings and bookings
     const currentDate = new Date();
     await screening.deleteMany({start_time: { $lte: currentDate }});
-    await bookingModels.deleteMany({createdAt: { $lte: currentDate }});
+    await booking.deleteMany({createdAt: { $lte: currentDate }});
 
     if (config.dummyData) await dummyData();
 }
@@ -18,12 +18,13 @@ const cleanUp = async () => {
 
 const dummyData = async () => {
 
-    // await screening.deleteMany();
+    await screening.deleteMany();
     // return;
 
     const movies = await movie.find({playingNow: true});
     const auditoriums = await auditorium.find();
     const currentDate = new Date();
+    const dummyUser = await user.findOne({email: 'dummy@dummy.com'});
 
     // for every auditorium
     for (let audi = 0; audi < auditoriums.length; audi++) {
@@ -38,18 +39,35 @@ const dummyData = async () => {
              // every third hour, between 8 -> 23 = 5h
             for (let hour = 8; hour < 26; hour = hour + 3) {
 
+                // pick a random movie to show
                 const moveToShow = movies[Math.floor(Math.random()*movies.length)];
 
+                // Check if this time and auditorium is not occupied
                 date.setUTCHours(hour,0,0,0);
-
                 const found = await screening.findOne({auditorium: auditoriums[audi]._id, start_time: date});
-
                 if (found) continue;
 
-                await new screening({
+                // Create screening
+                const createdScreening = await new screening({
                     movie: moveToShow._id,
                     auditorium: auditoriums[audi]._id,
                     start_time: date
+                }).save();
+
+                // Define random amount of already booked seats
+                const amountOfSeatsToBook = Math.floor(Math.random() * 310);
+                var seats = [];
+                for (let i = 8; i < amountOfSeatsToBook; i++) {
+                    const seat = Math.floor(Math.random() * 310) + 1;
+                    if (seats.includes(seat)) continue
+                    seats.push(seat);
+                }
+
+                // Create booking
+                await new booking({
+                    userID: dummyUser._id,
+                    screeningID: createdScreening._id,
+                    seats: seats
                 }).save();
 
             }
