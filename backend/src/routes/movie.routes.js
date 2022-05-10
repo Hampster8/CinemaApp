@@ -5,7 +5,7 @@ const router = express.Router();
 
 router.get('/', controller.getAllMovies);
 router.get('/:imdbID', controller.getOneMovie);
-router.post('/', controller.createMovie);
-router.delete('/:imdbID', controller.deleteMovie);
+router.post('/', auth.isAdmin, controller.createMovie);
+router.delete('/:imdbID', auth.isAdmin, controller.deleteMovie);
 
 module.exports = router;

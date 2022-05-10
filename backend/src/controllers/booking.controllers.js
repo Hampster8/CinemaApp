@@ -64,8 +64,12 @@ const getBookingById = async (req, res) => {
 };
 
 const deleteBooking = async (req, res) => {
+    const token = req.cookies.token;
+    const jwt = JWT.decode(token, {complete: true});
+    if (jwt === null) return res.status(422).json({error: 'The ID may not be valid!'});
+    const id = jwt.payload._id;
     try {
-        await Bookings.deleteOne({_id: req.params.id })
+        await Bookings.deleteOne({_id: req.params.id, userID: id })
         res.status(204).send()
     } catch {
         res.status(404)
