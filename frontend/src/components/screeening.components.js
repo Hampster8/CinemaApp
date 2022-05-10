@@ -54,6 +54,7 @@ const Screening = ({movieId, onClickedScreening, count, SetCount, screenings, Se
 
     const IncreaseCount = (Increase) => {
         if (count === 0 && !Increase) return;
+        if (count === 30 && Increase) return;
         SetCount(Increase ? count + 1 : count - 1);
     }
 

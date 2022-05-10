@@ -51,6 +51,7 @@ const MoviePage = () => {
     const SetCount = (value) => {
         UpdateCount(value);
         SetActiveScreening(null);
+        SetSeatMarked([]);
     }
 
     const ScreeningClicked = (newScreening) => {
@@ -148,6 +149,7 @@ const MoviePage = () => {
                         <div style={{width: 330, float: 'right'}} >
                             <Screening movieId={movieData._id} activeScreening={activeScreening} count={count} screenings={screenings} SetScreenings={SetScreenings} SetCount={SetCount} onClickedScreening={ScreeningClicked} />
                             <div style={{marginTop: 20}} >
+                                <p style={{color: '#fff'}} >Price: {seatsMarked.length * 95}kr</p>
                                 <CreateBookingBtn />
                             </div>
                         </div>
