@@ -1,6 +1,3 @@
-### React & Express Full Stack Template
-
-Full Stack Template using _React_ and _Express_ that has a user authentication middleware using _jwt_. The application uses _Mongoose/MongoDB_ for the database.
 
 ### Prerequisites
 
