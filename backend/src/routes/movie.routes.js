@@ -1,6 +1,6 @@
 const express = require('express');
 const controller = require('../controllers/movie.controllers');
-
+const auth = require('../middlewares/userAuthentication.middlewares');
 const router = express.Router();
 
 router.get('/', controller.getAllMovies);
