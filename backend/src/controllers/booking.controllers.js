@@ -19,6 +19,20 @@ const createBooking = async (req, res) => {
     
 }
 
+const getAllBokingsForUser = async (req, res) => {
+    const token = req.cookies.token;
+    const jwt = JWT.decode(token, {complete: true});
+    if (jwt === null) return res.status(422).json({error: 'The ID may not be valid!'});
+    const id = jwt.payload._id;
+    try {
+        const bookings = await Bookings.find({userID: id});
+        res.send(bookings)
+    } catch {
+        res.status(404)
+        res.send({ error: "This booking does not exist." })
+    }
+};
+
 const getAllBookings = async (req, res) => {
     try {
         const bookings = await Bookings.find()
@@ -64,5 +78,6 @@ module.exports = {
     deleteBooking,
     getAllBookings,
     getBookingByEmail,
-    getBookingById
+    getBookingById,
+    getAllBokingsForUser
 };
