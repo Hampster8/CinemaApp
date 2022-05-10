@@ -39,7 +39,7 @@ const style = {
 
 const SeatsSvg = ({clickOnSeat}) => {
     return (
-        <svg width="515" height="495" viewBox="0 0 515 495" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <svg width="415" height="395" viewBox="0 0 515 495" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path style={style.seat} onClick={(e) => clickOnSeat(e.target.id)} id={'Seat1'}   d="M0 5C0 2.23858 2.23858 0 5 0H15.1949C17.9563 0 20.1949 2.23858 20.1949 5V15.1949C20.1949 17.9563 17.9563 20.1949 15.1949 20.1949H5C2.23858 20.1949 0 17.9563 0 15.1949V5Z" fill="#1F1F1F"/>
             <path style={style.seat} onClick={(e) => clickOnSeat(e.target.id)} id={'Seat2'}   d="M26 5C26 2.23858 28.2386 0 31 0H41.1949C43.9563 0 46.1949 2.23858 46.1949 5V15.1949C46.1949 17.9563 43.9563 20.1949 41.1949 20.1949H31C28.2386 20.1949 26 17.9563 26 15.1949V5Z" fill="#1F1F1F"/>
             <path style={style.seat} onClick={(e) => clickOnSeat(e.target.id)} id={'Seat3'}   d="M52 5C52 2.23858 54.2386 0 57 0H67.1949C69.9563 0 72.1949 2.23858 72.1949 5V15.1949C72.1949 17.9563 69.9563 20.1949 67.1949 20.1949H57C54.2386 20.1949 52 17.9563 52 15.1949V5Z" fill="#1F1F1F"/>
@@ -406,7 +406,7 @@ const SeatsSvg = ({clickOnSeat}) => {
 
 const ScreenSvg = () => {
     return (
-        <svg width="601" height="237" viewBox="0 0 601 237" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <svg width="415" height="237" viewBox="0 0 601 237" fill="none" xmlns="http://www.w3.org/2000/svg">
             <rect width="601" height="236.684" fill="url(#paint0_linear_83_2)" fillOpacity="0.2"/>
             <rect width="601" height="8.88575" fill="#1F1F1F"/>
             <defs>

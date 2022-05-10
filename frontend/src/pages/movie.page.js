@@ -174,7 +174,7 @@ const style = {
     },
     headerSubContainer: {
         display: 'flex',
-        width: '100%',
+        width: '70%',
         justifyContent: 'right',
         paddingTop: 30,
     },
@@ -202,11 +202,12 @@ const style = {
         display: 'inline',
         width: '100%',
         alignContent: 'center',
-        textAlign: 'center'
+        textAlign: 'center',
     },
     seatsContainer: {
-        paddingLeft: 100,
-        paddingRight: 100
+        paddingLeft: 1,
+        paddingRight: 1,
+        marginTop: '-38px'
     },
 }
 
