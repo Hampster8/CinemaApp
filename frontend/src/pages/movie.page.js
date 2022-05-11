@@ -5,7 +5,7 @@ import { useAuth } from '../contexts/authentication.contexts';
 
 import MovieInfo from '../components/movieInfo.components';
 import Seats from '../components/seats.components';
-import Screening from '../components/screeening.components';
+import Screening from '../components/screening.components';
 
 
 const MoviePage = () => {

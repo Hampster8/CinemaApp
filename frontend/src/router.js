@@ -6,6 +6,7 @@ import AppLayout from './layouts/app.layouts';
 import LoginPage from './pages/login.pages';
 import SignupPage from './pages/signup.pages';
 
+import MyTickets from './pages/myTickets.page';
 import MoviePage from './pages/movie.page';
 import AboutPage from './pages/about.pages';
 
@@ -29,6 +30,7 @@ const Router = () => {
                     <Route path="/private" element={<PrivateRouteWrapper redirectTo='/login' />}>
                         <Route index element={<HomePage />} />
                         <Route path="*" element={<HomePage />} />
+                        <Route path="/private/myTickets" element={<MyTickets />} />
                     </Route>
 
                 </Route>

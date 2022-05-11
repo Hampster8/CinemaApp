@@ -13,7 +13,7 @@ const Header = () => {
         if (!auth.user) return <Link to="/login" className='link'>Login</Link>;
         return (
             <div>
-                <Link to='/mytickets' className='link'>My Tickets</Link>
+                <Link to='/private/myTickets' className='link'>My Tickets</Link>
                 <Link to='/' onClick={() => auth.logout()} className='link'>Logout</Link>
             </div>
         );
