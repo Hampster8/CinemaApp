@@ -13,11 +13,14 @@ const myTicketsList = () => {
     console.log(ticketList);
 
     return (
-
         <div>
-
-        
-        
+            {ticketList.map((tickets) => {
+                return (
+                    <div>
+                        <li>{tickets}</li>
+                    </div>
+                )
+            })}
         </div>
     );
 }
