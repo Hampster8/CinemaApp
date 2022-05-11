@@ -17,8 +17,9 @@ const MyTickets = () => {
             {ticketList.map((ticket , key) => {
                 return (
                     <div style={style.ticketContainer} key={key}>
-                        <h1>The Northman</h1>
-                        <p>Created at: {ticket.createdAt}</p>
+                        <h1>Movie Name: The Northman</h1>
+                        <p>Created at: {ticket.createdAt.substring(0, 10)}</p> {/* format ISODate as Year-Month-Day (From index 0 to 10) */}
+                        <p>Time: 11.00 pm</p>                                  {/* Viste inte om detta var tid för bokningen eller när den spelades. */}
                         <p>Screaning id: {ticket.screeningID}</p>
                         <p>Seats: {ticket.seats.toString()}</p>
                         <button style={style.buttonStyle} onClick={() => cancelBooking(ticket._id)}> Cancel booking! </button>
@@ -31,6 +32,13 @@ const MyTickets = () => {
 
 const cancelBooking = (bookingId) => {
 
+    fetch("URL?" + bookingId, {
+        method: 'DELETE',
+      })
+      .then(res => {
+        return res.json()
+      }) 
+      .then(data => console.log(data))
 }
 
 const style = {
