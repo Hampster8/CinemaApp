@@ -29,7 +29,6 @@ const Router = () => {
                     {/* Private Routes */}
                     <Route path="/private" element={<PrivateRouteWrapper redirectTo='/login' />}>
                         <Route index element={<HomePage />} />
-                        <Route path="*" element={<HomePage />} />
                         <Route path="myTickets" element={<MyTickets />} />
                     </Route>
 

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 
-const myTicketsList = () => {
+const MyTickets = () => {
 
     const [ticketList, SetTicketList] = useState([]);
 
@@ -14,10 +14,12 @@ const myTicketsList = () => {
 
     return (
         <div>
-            {ticketList.map((tickets) => {
+            {ticketList.map((ticket , key) => {
                 return (
-                    <div>
-                        <li>{tickets}</li>
+                    <div style={style.ticketContainer} key={key}>
+                        <p>Created at: {ticket.createdAt}</p>
+                        <p>Screaning id: {ticket.screeningID}</p>
+                        <p>Seats: {ticket.seats.toString()}</p>
                     </div>
                 )
             })}
@@ -25,4 +27,11 @@ const myTicketsList = () => {
     );
 }
 
-export default myTicketsList;
+const style = {
+    ticketContainer: {
+        backgroundColor: 'black',
+        color: '#fff'
+    }
+}
+
+export default MyTickets;
