@@ -3,29 +3,57 @@ import React, { useEffect, useState } from 'react';
 const MyTickets = () => {
 
     const [ticketList, SetTicketList] = useState([]);
+    const [loading, SetLoading] = useState(true);
 
     useEffect(() => {
         fetch('/api/bookings/mybookings')
         .then(res => res.json())
-        .then(data => SetTicketList(data))
+        .then(data => {
+            if (Array.isArray(data)) SetTicketList(data);
+            SetLoading(false);
+            console.log(data)
+        })
     }, []);
 
-    console.log(ticketList);
+    const showMinutesAndHours = (timeObject) => {
+        const y = new Date(timeObject)
+        return y.getHours() + "." + String(y.getMinutes()).padStart(2, "0");
+    }
+
+    const dateString = (timeObject) => {
+        const y = new Date(timeObject)
+        return y.toDateString()
+    }
+
+
 
     return (
         <div>
-            {ticketList.map((ticket , key) => {
-                return (
-                    <div style={style.ticketContainer} key={key}>
-                        <h1>Movie Name: The Northman</h1>
-                        <p>Created at: {ticket.createdAt.substring(0, 10)}</p> {/* format ISODate as Year-Month-Day (From index 0 to 10) */}
-                        <p>Time: 11.00 pm</p>                                  {/* Viste inte om detta var tid för bokningen eller när den spelades. */}
-                        <p>Screaning id: {ticket.screeningID}</p>
-                        <p>Seats: {ticket.seats.toString()}</p>
-                        <button style={style.buttonStyle} onClick={() => cancelBooking(ticket._id)}> Cancel booking! </button>
-                    </div>
-                )
-            })}
+            <h1 style={style.header}>My Bookings</h1>
+            {loading ? <p style={{color: "#fff"}}>Loading...</p> : (
+                <div>
+                    {ticketList.map((ticket , key) => {
+                        return (
+                            <div className="shadow" style={style.ticketContainer} key={key}>
+                                <h1>{ticket.Title}</h1>
+                                <div>
+                                    <p>Starts at: {showMinutesAndHours(ticket.start_time)}</p>
+                                    <p>Date: {dateString(ticket.start_time)}</p>
+                                    <p>Seats:</p>
+                                    <ul>
+                                        {
+                                            ticket.seats.map((seat, key) => {
+                                                return <li key={key}>{seat}</li>
+                                            })
+                                        }
+                                    </ul>
+                                </div>
+                                <button className="redbtn" onClick={() => cancelBooking(ticket._id)}> Cancel booking! </button>
+                            </div>
+                        )
+                    })}
+                </div>
+            )}
         </div>
     );
 }
@@ -42,14 +70,16 @@ const cancelBooking = (bookingId) => {
 }
 
 const style = {
-    ticketContainer: {
-        border: `5px solid #212121`,
-        borderRadius: '10px',
+    header: {
         color: '#fff'
     },
-    buttonStyle: {
-        backgroundColor: '#D75E15',
-    },
+    ticketContainer: {
+        padding: 20,
+        border: `5px solid #212121`,
+        borderRadius: '10px',
+        marginBottom: 20,
+        color: '#fff'
+    }
 }
 
 export default MyTickets;

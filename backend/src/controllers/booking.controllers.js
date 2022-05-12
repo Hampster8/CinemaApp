@@ -1,5 +1,9 @@
 const JWT = require('jsonwebtoken');
 const Bookings = require('../models/booking.models');
+const Screening = require('../models/screening.models');
+const Movie = require('../models/movie.models');
+const Config = require('../configs/env.configs');
+const axios = require('axios').default;
 
 const createBooking = async (req, res) => {
     const token = req.cookies.token;
@@ -26,8 +30,27 @@ const getAllBokingsForUser = async (req, res) => {
     const id = jwt.payload._id;
     try {
         const bookings = await Bookings.find({userID: id});
-        res.send(bookings)
-    } catch {
+        var data = [];
+        for (var i = 0; i < bookings.length; i++) {
+
+            const screening = await Screening.findById(bookings[i].screeningID);
+            const movieId = await Movie.findById(screening.movie);
+            const url = `https://www.omdbapi.com/?apikey=${Config.omdbapi}&i=${movieId.imdbID}`;
+            const movie = await axios.get(url);
+
+            const obj = {
+                ...screening._doc,
+                ...movie.data,
+                ...bookings[i]._doc
+            }
+
+            data.push(obj);
+        }
+
+
+        res.send(data)
+    } catch (e) {
+        console.log(e);
         res.status(404)
         res.send({ error: "This booking does not exist." })
     }
