@@ -25,6 +25,15 @@ const MyTickets = () => {
         return y.toDateString()
     }
 
+    const cancelBooking = (bookingId) => {
+        fetch('/api/bookings/' + bookingId, {
+            method: 'DELETE',
+          })
+          .then(res => {
+              SetTicketList([]);
+          }) 
+    }
+    
 
 
     return (
@@ -32,41 +41,34 @@ const MyTickets = () => {
             <h1 style={style.header}>My Bookings</h1>
             {loading ? <p style={{color: "#fff"}}>Loading...</p> : (
                 <div>
-                    {ticketList.map((ticket , key) => {
-                        return (
-                            <div className="shadow" style={style.ticketContainer} key={key}>
-                                <h1>{ticket.Title}</h1>
-                                <div>
-                                    <p>Starts at: {showMinutesAndHours(ticket.start_time)}</p>
-                                    <p>Date: {dateString(ticket.start_time)}</p>
-                                    <p>Seats:</p>
-                                    <ul>
-                                        {
-                                            ticket.seats.map((seat, key) => {
-                                                return <li key={key}>{seat}</li>
-                                            })
-                                        }
-                                    </ul>
-                                </div>
-                                <button className="redbtn" onClick={() => cancelBooking(ticket._id)}> Cancel booking! </button>
-                            </div>
-                        )
-                    })}
+                    {ticketList.length === 0 ? <p style={{color: "#fff"}}>No bookings</p> : (
+                        <div>
+                            {ticketList.map((ticket , key) => {
+                                return (
+                                    <div className="shadow" style={style.ticketContainer} key={key}>
+                                        <h1>{ticket.Title}</h1>
+                                        <div>
+                                            <p>Starts at: {showMinutesAndHours(ticket.start_time)}</p>
+                                            <p>Date: {dateString(ticket.start_time)}</p>
+                                            <p>Seats:</p>
+                                            <ul>
+                                                {
+                                                    ticket.seats.map((seat, key) => {
+                                                        return <li key={key}>{seat}</li>
+                                                    })
+                                                }
+                                            </ul>
+                                        </div>
+                                        <button className="redbtn" onClick={() => cancelBooking(ticket._id)}> Cancel booking! </button>
+                                    </div>
+                                )
+                            })}
+                        </div>
+                    )}
                 </div>
             )}
         </div>
     );
-}
-
-const cancelBooking = (bookingId) => {
-
-    fetch("URL?" + bookingId, {
-        method: 'DELETE',
-      })
-      .then(res => {
-        return res.json()
-      }) 
-      .then(data => console.log(data))
 }
 
 const style = {

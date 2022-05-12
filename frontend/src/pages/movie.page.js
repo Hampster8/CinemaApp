@@ -108,7 +108,7 @@ const MoviePage = () => {
             })
         }).then(res => {
             if (res.ok) {
-                window.location.href="/mybookings"
+                window.location.href="/private/myTickets"
             }
         });
     }
