@@ -5,6 +5,7 @@
   "proxy": "http://localhost:3000",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "npm run build && npm run backend",
     "build": "webpack --mode production --config frontend/webpack.config.js",
     "backend": "node ./backend/index.js",
     "frontend": "webpack-dev-server --mode development --open --config frontend/webpack.config.js"
