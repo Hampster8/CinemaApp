@@ -4,6 +4,7 @@ const MyTickets = () => {
 
     const [ticketList, SetTicketList] = useState([]);
     const [loading, SetLoading] = useState(true);
+    const [u, setU] = useState(false);
 
     useEffect(() => {
         fetch('/api/bookings/mybookings')
@@ -11,9 +12,8 @@ const MyTickets = () => {
         .then(data => {
             if (Array.isArray(data)) SetTicketList(data);
             SetLoading(false);
-            console.log(data)
         })
-    }, []);
+    });
 
     const showMinutesAndHours = (timeObject) => {
         const y = new Date(timeObject)
@@ -30,7 +30,7 @@ const MyTickets = () => {
             method: 'DELETE',
           })
           .then(res => {
-              SetTicketList([]);
+            setU(!u);
           }) 
     }
     
