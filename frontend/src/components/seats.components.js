@@ -9,7 +9,7 @@ const Seats = ({seatClicked, seatsMarked, unavailableSeats, activeScreening}) =>
                 document.getElementById('Seat'+index).style.fill = '#4F4F4F';
             }
             unavailableSeats.forEach(id => {
-                document.getElementById('Seat'+id).style.fill = '#1F1F1F';
+                document.getElementById('Seat'+id).style.fill = '#FF0000';
             });
             seatsMarked.forEach(id => {
                 document.getElementById(id).style.fill = 'green';
