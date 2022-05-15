@@ -41,7 +41,12 @@ const omdbapi = async (movieRecords) => {
     for (const movieRecord of movieRecords) {
         const url = `https://www.omdbapi.com/?apikey=${Config.omdbapi}&i=${movieRecord.imdbID}`;
         const movie = await axios.get(url);
-        movies.push(movie.data);
+        const obj = {
+            ...movieRecord._doc,
+            ...movie.data
+        }
+
+        movies.push(obj);
     }
     return movies;
 }

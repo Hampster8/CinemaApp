@@ -1,29 +1,51 @@
 import React from 'react';
 
-const Confirmation = () => {
-    return (
+const Confirmation = ({screening, movieData, seats}) => {
 
+    const showMinutesAndHours = (timeObject) => {
+        const y = new Date(timeObject)
+        return y.getHours() + "." + String(y.getMinutes()).padStart(2, "0");
+    }
+
+    
+    const dateString = (timeObject) => {
+        const y = new Date(timeObject)
+        return y.toDateString()
+    }
+
+    return (
         <div className='background' style={background}>
             <div className='miniBackground' style={miniBackground}>
                 <h1 style={textBox}>Wooo Hoo!</h1>
                 <p style={confirmedBooking}>Your Booking Has Now Been Confirmed!</p>
                 <div style={hdiv}>
-                <p style={headlines}>Ticket ID:</p>
-                <p style={style}>56D23</p>
+                </div>
+                <div style={hdiv}>
+                <p style={headlines}>Moive:</p>
+                <p style={style}>{movieData.Title}</p>
                 </div>
                 <div style={hdiv}>
                 <p style={headlines}>Date:</p>
-                <p style={style}>Tuesday 10 May 2022</p>
+                <p style={style}>{dateString(screening.start_time)}</p>
                 </div>
                 <div style={hdiv}>
                 <p style={headlines}>Time:</p>
-                <p style={style}>13:00 PM</p>
+                <p style={style}>{showMinutesAndHours(screening.start_time)}</p>
                 </div>
-
+                <div style={hdiv}>
+                <p style={headlines}>Seats:</p>
+                <ul>
+                    {
+                        seats.map((seat, key) => {
+                            return <li style={style} key={key}>{seat}</li>
+                        })
+                    }
+                </ul>
+                </div>
             </div>
 
             <div className='button' style={{textAlign: 'center', paddingTop: '40px'}}>
-                <button style={buttonStyle}>
+                <button onClick={() => window.location.href="/private/myTickets"} style={buttonStyle}>
                     Amazing!
                 </button>
             </div>

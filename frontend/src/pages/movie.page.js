@@ -6,6 +6,7 @@ import { useAuth } from '../contexts/authentication.contexts';
 import MovieInfo from '../components/movieInfo.components';
 import Seats from '../components/seats.components';
 import Screening from '../components/screening.components';
+import Confirmation from '../components/confirmation.components';
 
 
 const MoviePage = () => {
@@ -17,6 +18,7 @@ const MoviePage = () => {
     const [unavailableSeats, SetUnavailableSeats] = useState([]);
     const [activeScreening, SetActiveScreening] = useState(null);
     const [seatsMarked, SetSeatMarked] = useState([]);
+    const [confirme, SetConfirme] = useState(false)
     const [screenings, SetScreenings] = useState({
         loading: true,
         date: null,
@@ -108,12 +110,15 @@ const MoviePage = () => {
             })
         }).then(res => {
             if (res.ok) {
-                window.location.href="/private/myTickets"
+                SetConfirme(true);
             }
         });
     }
 
     const Page = () => {
+
+        if (confirme) return (<Confirmation seats={seatsMarked} screening={activeScreening} movieData={movieData} />)
+        
         return (
             <div>
                 <div className='shadow' style={style.headerContainer}>
