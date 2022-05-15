@@ -5,24 +5,28 @@ const hashPassword = require('../utils/hash.utils');
 const Validator = require('../utils/validator.utils');
 
 const loginUser = async (req, res) => {
+
     const email = req.body.email;
     const password = hashPassword(req.body.password);
     const user = await User.findOne({email: email});
 
-    if (password === user.password){
-        const token = JWT.sign(
-            {_id: user._id},
-            Config.secrets.jwt,
-            {expiresIn: '86400s'}
-        );
-
-        res.cookie('token', token, {
-            httpOnly: true,
-            maxAge: 86_400_000
-        });
-
-        return res.sendStatus(200);
+    if (user !== null) {
+        if (password === user.password){
+            const token = JWT.sign(
+                {_id: user._id},
+                Config.secrets.jwt,
+                {expiresIn: '86400s'}
+            );
+    
+            res.cookie('token', token, {
+                httpOnly: true,
+                maxAge: 86_400_000
+            });
+    
+            return res.sendStatus(200);
+        }
     }
+
     return res.status(401).json({error: 'Credentials is not valid!'});
 };
 

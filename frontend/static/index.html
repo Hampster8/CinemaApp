@@ -4,19 +4,89 @@
   <meta charset="UTF-8"> 
   <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
   <meta http-equiv="X-UA-Compatible" content="ie=edge"> 
-  <title>React & Express Template</title>
+
+  <title>Cinema</title> 
 
   <style>
-    @import url('https://fonts.googleapis.com/css2?family=Pacifico&display=swap%27');
+    @import url('https://fonts.googleapis.com/css2?family=Pacifico&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@200&display=swap');
+
+    html, body {
+      margin: 0;
+      padding: 0;
+      background-color: #141414;
+      padding: 0 6%;
+      font-family: 'Nunito';
+      font-style: 'bolder';
+      font-weight: '700';
+      padding-top: '60px';
+    }
+
+    button {
+      background: #009556;
+      box-shadow: 0px 4px 0px #02683D;
+      -webkit-box-shadow: 0px 4px 0px #02683D;
+      -moz-box-shadow: 0px 4px 0px #02683D;
+      border: none;
+      color: white;
+      padding: 15px 32px;
+      text-align: center;
+      text-decoration: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-family: 'Nunito';
+      font-style: normal;
+      font-weight: 700;
+    }
+
+    .redbtn {
+      background: #953600;
+      box-shadow: 0px 4px 0px #682702;
+      -webkit-box-shadow: 0px 4px 0px #682702;
+      -moz-box-shadow: 0px 4px 0px #682702;
+    }
+
+    .redbtn:hover  {
+      background: #b34200;
+
+    }
+
+    button:hover {
+      background: #009e5c;
+    }
+
+    button:active {
+      background: #009556;
+      box-shadow: none;
+      transform: translate(0, 4px);
+    }
+
+    .link {
+      text-decoration: none;
+      color: white;
+      font-family: 'Nunito';
+      font-style: 'bolder';
+      font-weight: '700';
+      padding-top: '60px';
+      margin-left: 50px;
+      opacity: 0.5;
+    }
+
+    .link:hover {
+      opacity: 1;
+    }
+
+    .shadow {
+      box-shadow: 0px 4px 0px #0E0E0E;
+      -webkit-box-shadow: 0px 4px 0px #0E0E0E;
+      -moz-box-shadow: 0px 4px 0px #0E0E0E;
+    }
+
   </style>
 
-<style>
-  @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@200&display=swap%27');
-</style>
-
-  
-</head> 
-<body> 
-  <section id="app"></section>
-</body> 
-</html> 
+</head>
+<body>
+  <section id="app"></section> 
+  <script src="/main.js"></script>
+</body>
+</html>

@@ -1,6 +1,6 @@
 const express = require('express');
 const controller = require('../controllers/auditorium.controllers');
-
+const auth = require('../middlewares/userAuthentication.middlewares');
 const router = express.Router();
 
 

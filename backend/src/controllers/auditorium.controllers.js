@@ -40,9 +40,6 @@ const updateAuditorium = async (req, res) => {
         if (req.body.auditoriumName) {
             auditorium.auditoriumName = req.body.auditoriumName
         }
-        if (req.body.auditoriumSeats) {
-            auditorium.auditoriumSeats = req.body.auditoriumSeats
-        }
         await auditorium.save()
         res.send(auditorium)
 
@@ -55,8 +52,7 @@ const updateAuditorium = async (req, res) => {
 const createAuditorium = async (req, res) => {
   
     const auditorium = new Auditorium({
-        auditoriumName: req.body.auditoriumName,
-        auditoriumSeats: req.body.auditoriumSeats,
+        auditoriumName: req.body.auditoriumName
     });
 
     await auditorium.save()
